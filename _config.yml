@@ -1,0 +1,185 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+# title: MA8502 - Numerical Solutions of Partial Differential Equations
+title: TMA4320 - Scientific Computation
+logo: logo.png
+author: With contributions from Ronny Bergman, Markus Grasmair, Anne Kværnø, André Massing
+email: andre.massing@ntnu.no
+#description: >- # this means to ignore newlines until "baseurl:"
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. 
+  # See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+    - tasklist
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: tma4320_SciComp.tex
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
+  # path_to_book: docs  # Optional path to your book, relative to the repository root
+  branch: main  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
+
+sphinx:
+  extra_extensions: 
+    # Make sure to install corresponding python packages, e.g. via `pip install sphinx-proof`
+    - sphinx_proof
+    - sphinx_togglebutton
+    - sphinx_exercise
+    - sphinx_copybutton
+  config:
+    bibtex_reference_style: author_year
+    myst_dmath_double_inline: true
+    sphinx:
+    html_js_files:
+    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+    latex_elements:
+        preamble:  
+          \usepackage{amsmath}
+          \usepackage[nice]{nicefrac}
+          \usepackage{notation}
+        # preamble:  
+          # \usepackage{notation}
+          # \DeclareMathOperator{\Div}{div}
+          # \DeclareMathOperator{\Grad}{grad}
+          # \DeclareMathOperator{\Curl}{curl}
+          # \DeclareMathOperator{\Rot}{rot}
+          # \DeclareMathOperator{\ord}{ord}
+          # \DeclareMathOperator{\Kern}{ker}
+          # \DeclareMathOperator{\Image}{im}
+          # \DeclareMathOperator{\spann}{span}
+          # \DeclareMathOperator{\dist}{dist}
+          # \DeclareMathOperator{\diam}{diam}
+          # \DeclareMathOperator{\sig}{sig}
+          # \newcommand{\VV}{\mathbb{V}}
+          # \newcommand{\dx}{\,\mathrm{d}x}
+          # \newcommand{\dy}{\,\mathrm{d}y}
+          # \newcommand{\ds}{\,\mathrm{d}s}
+          # \newcommand{\dt}{\,\mathrm{d}t}
+          # \newcommand{\dS}{\,\mathrm{d}S}
+          # \newcommand{\dV}{\,\mathrm{d}V}
+          # \newcommand{\dX}{\,\mathrm{d}X}
+          # \newcommand{\dY}{\,\mathrm{d}Y}
+          # \newcommand{\dE}{\,\mathrm{d}E}
+          # \newcommand{\dK}{\,\mathrm{d}K}
+          # \newcommand{\dM}{\,\mathrm{d}M}
+          # \newcommand{\dGamma}{\,\mathrm{d} \Gamma}
+          # \newcommand{\cd}{\mathrm{cd}}
+          # \newcommand{\onehalf}{\frac{1}{2}}
+          # \newcommand{\bfP}{\boldsymbol P}
+          # \newcommand{\bfx}{\boldsymbol x}
+          # \newcommand{\bfa}{\boldsymbol a}
+          # \newcommand{\bfu}{\boldsymbol u}
+          # \newcommand{\bfv}{\boldsymbol v}
+          # \newcommand{\bfe}{\boldsymbol e}
+          # \newcommand{\bfg}{\boldsymbol g}
+          # \newcommand{\bfb}{\boldsymbol b}
+          # \newcommand{\bff}{\boldsymbol f}
+          # \newcommand{\bfp}{\boldsymbol p}
+          # \newcommand{\bft}{\boldsymbol t}
+          # \newcommand{\bfj}{\boldsymbol j}
+          # \newcommand{\bfB}{\boldsymbol B}
+          # \newcommand{\bfV}{\boldsymbol V}
+          # \newcommand{\bfE}{\boldsymbol E}
+          # \newcommand{\bfK}{\boldsymbol K}
+          # \newcommand{\mcA}{\mathcal{A}}
+          # \newcommand{\mcK}{\mathcal{K}}
+          # \newcommand{\mcT}{\mathcal{T}}
+    latex_additional_files : ["notation.sty"]
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    mathjax3_config:
+      tex:
+        macros:
+          "RR" : ["\\mathbb{R}"]
+          "NN" : ["\\mathbb{N}"]
+          "VV" : ["\\mathbb{V}"]
+          "CC" : ["\\mathbb{C}"]
+          "PP" : ["\\mathbb{P}"]
+          # "SS" : ["\\mathbb{S}"]
+          "PPc" : ["\\mathbb{P}^{\\mathrm{c}}"]
+          "PPdc" : ["\\mathbb{P}^{\\mathrm{dc}}"]
+          "floor": ["\\lfloor#1\\rfloor", 1]
+          "mrm": ["\\mathrm{#1}", 1]
+          "mcA" : ["\\mathcal{A}"]
+          "mcL" : ["\\mathcal{L}"]
+          "mcT" : ["\\mathcal{T}"]
+          "mcF" : ["\\mathcal{F}"]
+          "mcP" : ["\\mathcal{P}"]
+          "mcO" : ["\\mathcal{O}"]
+          "cd" : ["\\mathrm{cd}"]
+          "onehalf" : ["\\frac{1}{2}"]
+          "bfa" : ["\\mathbf{a}"]
+          "bfb" : ["\\mathbf{b}"]
+          "bfe" : ["\\mathbf{e}"]
+          "bff" : ["\\mathbf{f}"]
+          "bfg" : ["\\mathbf{g}"]
+          "bfj" : ["\\mathbf{j}"]
+          "bfn" : ["\\mathbf{n}"]
+          "bfp" : ["\\mathbf{p}"]
+          "bft" : ["\\mathbf{t}"]
+          "bfu" : ["\\mathbf{u}"]
+          "bfv" : ["\\mathbf{v}"]
+          "bfx" : ["\\mathbf{x}"]
+          "bfy" : ["\\mathbf{y}"]
+          "bfB" : ["\\mathbf{B}"]
+          "bfV" : ["\\mathbf{V}"]
+          "bfE" : ["\\mathbf{E}"]
+          "bfB" : ["\\mathbf{B}"]
+          "bfP" : ["\\mathbf{P}"]
+          "bfK" : ["\\mathbf{K}"]
+          "dx" : ["\\,\\mathrm{d}x"]
+          "dy" : ["\\,\\mathrm{d}y"]
+          "ds" : ["\\,\\mathrm{d}s"]
+          "dt" : ["\\,\\mathrm{d}t"]
+          "dS" : ["\\,\\mathrm{d}S"]
+          "dV" : ["\\,\\mathrm{d}V"]
+          "dX" : ["\\,\\mathrm{d}X"]
+          "dY" : ["\\,\\mathrm{d}Y"]
+          "dE" : ["\\,\\mathrm{d}E"]
+          "dK" : ["\\,\\mathrm{d}K"]
+          "dM" : ["\\,\\mathrm{d}M"]
+          "dU" : ["\\,\\mathrm{d}U"]
+          "dt" : ["\\,\\mathrm{d}t"]
+          # "PPc" : ["\\mathbb{P}_{\\mathrm{c}}^{#1}", 1]
+          "dGamma" : ["\\,\\mathrm{d} \\Gamma"]
+          "spann" : ["\\mathrm{span}"]
+          "diam" : ["\\mathrm{diam}"]
+          "convex" : ["\\mathrm{convex}"]
+          "avg":   ["\\{\\!\\!\\{ #1 \\}\\!\\!\\}", 1]
+          "wavg":  ["\\{\\!\\!\\{ #1 \\}\\!\\!\\}_{\\omega}", 1]
+          "wavgd": ["\\langle\\!\\langle#1\\rangle\\!\\rangle_{\\omega}", 1]
+          "jump": ["[\\![#1]\\!]", 1]
+          "jumps": ["[#1]]", 1]
+          "avgs": ["\\{#1\\}", 1]
+          "st" : ["\\;|\\;"]
+          "mrm": ["\\mathrm{#1}", 1]
+          "foralls" : ["\\forall\\,"]
+          "onehalf" : ["1/2"]
+          # "onehalf" : ["\\frac{1}{2}"]
+bibtex_bibfiles:
+  - TMA4320.bib
