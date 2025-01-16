@@ -4,7 +4,10 @@
 # title: MA8502 - Numerical Solutions of Partial Differential Equations
 title: TMA4320 - Scientific Computation
 logo: logo.png
-author: With contributions from Ronny Bergman, Markus Grasmair, Anne Kværnø, André Massing
+# author: Ronny Bergman, Markus Grasmair, Anne Kværnø, André Massing
+# author: Markus Grasmair
+# author: Anne Kværnø
+author: Anne Kværno, André Massing
 email: andre.massing@ntnu.no
 #description: >- # this means to ignore newlines until "baseurl:"
 
@@ -16,7 +19,7 @@ parse:
     - deflist
     - dollarmath
     # - html_admonition
-    # - html_image
+    - html_image
     - linkify
     # - replacements
     # - smartquotes

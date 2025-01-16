@@ -2,10 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: introduction
+root: README
 chapters:
-- file: chapter_preliminaries/vector_spaces
-- file: chapter_preliminaries/MachineRepresentationOfNumbers
+- file: chapter_introduction/MachineRepresentationOfNumbers.md
 - file: chapter_interpolation/LagrangeInterpolation
   sections:
   - file: chapter_interpolation/ErrorTheoryInterpolation

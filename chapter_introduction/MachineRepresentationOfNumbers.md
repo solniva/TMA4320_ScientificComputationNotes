@@ -12,67 +12,51 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "subslide"}}
 
-# Lecture 2
+# Introduction to Scientific Computation
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
-## 1. General Sources of Errors
+**Scientific Computation** (Scientific Computing, Computational science)
 
-$$
-% \DeclareMathOperator{\Div}{div}
-% \DeclareMathOperator{\Grad}{grad}
-% \DeclareMathOperator{\Curl}{curl}
-% \DeclareMathOperator{\Rot}{rot}
-% \DeclareMathOperator{\ord}{ord}
-% \DeclareMathOperator{\Kern}{ker}
-% \DeclareMathOperator{\Image}{im}
-% \DeclareMathOperator{\spann}{span}
-% \DeclareMathOperator{\dist}{dist}
-% \DeclareMathOperator{\diam}{diam}
-% \DeclareMathOperator{\sig}{sig}
-% \DeclareMathOperator{\fl}{fl}
-\newcommand{\RR}{\mathbb{R}}
-\newcommand{\NN}{\mathbb{N}}
-\newcommand{\VV}{\mathbb{V}}
-\newcommand{\FF}{\mathbb{F}}
-\newcommand{\dGamma}{\,\mathrm{d} \Gamma}
-\newcommand{\dGammah}{\,\mathrm{d} \Gamma_h}
-\newcommand{\dx}{\,\mathrm{d}x}
-\newcommand{\dy}{\,\mathrm{d}y}
-\newcommand{\ds}{\,\mathrm{d}s}
-\newcommand{\dt}{\,\mathrm{d}t}
-\newcommand{\dS}{\,\mathrm{d}S}
-\newcommand{\dV}{\,\mathrm{d}V}
-\newcommand{\dX}{\,\mathrm{d}X}
-\newcommand{\dY}{\,\mathrm{d}Y}
-\newcommand{\dE}{\,\mathrm{d}E}
-\newcommand{\dK}{\,\mathrm{d}K}
-\newcommand{\dM}{\,\mathrm{d}M}
-\newcommand{\cd}{\mathrm{cd}}
-\newcommand{\onehalf}{\frac{1}{2}}
-\newcommand{\bfP}{\boldsymbol P}
-\newcommand{\bfx}{\boldsymbol x}
-\newcommand{\bfy}{\boldsymbol y}
-\newcommand{\bfa}{\boldsymbol a}
-\newcommand{\bfu}{\boldsymbol u}
-\newcommand{\bfv}{\boldsymbol v}
-\newcommand{\bfe}{\boldsymbol e}
-\newcommand{\bfb}{\boldsymbol b}
-\newcommand{\bff}{\boldsymbol f}
-\newcommand{\bfp}{\boldsymbol p}
-\newcommand{\bft}{\boldsymbol t}
-\newcommand{\bfj}{\boldsymbol j}
-\newcommand{\bfB}{\boldsymbol B}
-\newcommand{\bfV}{\boldsymbol V}
-\newcommand{\bfE}{\boldsymbol E}
-\newcommand{\bfzero}{\boldsymbol 0}
-$$
+"*Scientific Computing is the collection of tools, techniques, and theories required to solve on a computer mathematical models of problems in Science and Engineering*" {cite}`GolubOrtega2014`.
 
-+++ {"slideshow": {"slide_type": "slide"}}
+As such Scientific Computing covers a wide range of topics and fields
+and if you ask 10 different domain experts to define the term *Scientifc
+Computing*, you will probably get 15 different answers.
 
-Recall the 6 steps in Scientific Computing
+This is in a way also reflected in the editorial comments for the
+[Wiki article on Computational Science](https://en.wikipedia.org/wiki/Computational_science).
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+Nevertheless, Scientific Computing is considered the third pillar of science, the others being **Experiments** and **Theory**.
+
+![Three pillar of science](science-pillars.png)
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+There a lot science disciplines employing the scientific computing for scientific discoveries, e.g.
+
+* Global ocean/climate modeling
+* Computational fluid dynamics
+* Seismology
+* Biophysics
+* Population dynamics (e.g.disease spreading)
+* Economics
+* Medical imaging
+* Material science
+
+**Challenge:**
+Find me a scientific discipline where no computational methods are employed!
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+The covid 19 pandemicwas a very good example of a typical science problem
+involving Scientific Computing, which typically consist  of the following steps.
+
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 1. Mathematical Modeling
 2. Analysis of the mathematical model (Existence, Uniqueness, Continuity)
@@ -81,36 +65,104 @@ Recall the 6 steps in Scientific Computing
 5. Postprocessing 
 6. Validation
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
-__Discussion__:
+This semester, we will learn about methods which helps you to e.g. 
 
-:::{admonition} TODO
-:class: danger dropdown
-Add mentimeter
-:::
+* model and predict the spreading of diseases like Covid 19
+* simulate the generation of patterns in biology
+* understand how images are compressed
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+<!-- ```{image} sihr_sim_results.png
+:alt: SIHR simulation results
+:class: bg-primary mb-1
+:width: 600px
+:align: center
+``` -->
+![SIHR simulation](sihr_sim_results_copy.png)
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+from IPython.display import YouTubeVideo, HTML
+YouTubeVideo('nw2bPnhtxN8', width=800, height=500)
+```
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+In general, we can think of Scientific as an interdisplinary, computational based approach towards scientific discovery:
+
+<!-- ```{image} venn_diagram_scientific_computing.png
+:alt: Three pillars of Scientific Computing
+:class: bg-primary mb-1
+:width: 800px
+:align: center
+``` -->
+![Three pillars of Scientific Computing](venn_diagram_scientific_computing_copy.png)
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: skip
+tags: [hide-cell]
+---
+# The figure was generated by the following code
+
+import matplotlib.pyplot as plt
+from matplotlib_venn import venn3
+
+# Define the labels for the Venn diagram
+labels = {
+    '100': 'Computer Science\n(Programming Languages/Frameworks)',
+    '010': 'Applied and Computational Mathematics\n(Models/Algorithms)',
+    '001': 'Problem Domain\n(Engineering/Science)',
+    '110': '',
+    '101': '',
+    '011': '',
+    '111': 'Scientific Computing'
+}
+
+# Create the Venn diagram
+plt.figure(figsize=(8, 8))
+venn = venn3(subsets=(1, 1, 1, 1, 1, 1, 1), 
+               # set_labels=('Computer Science', 'Applied and Computational Mathematics', 'Problem Domain')
+               set_labels=('', '', '')
+            )
+# Update the labels
+for idx, label in labels.items():
+   venn.get_label_by_id(idx).set_text(label)
+
+# Display the plot
+plt.title("Venn Diagram of Scientific Computing")
+plt.show()
+```
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+__Mentimeter time__:
+
+Please go to [](https://www.menti.com) and enter the following code **7381 6459**
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Machine Representation of Numbers
 
 Today we will talk about one important and unavoidable source of errors,
 namely the way, a computer deals with numbers.
-
-+++ {"slideshow": {"slide_type": "slide"}}
-
-## 2. Machine Representation of Numbers
-
-+++ {"slideshow": {"slide_type": "slide"}}
 
 Let's start with two simple tests. 
 * Define two numbers $a=0.2$ and $b=0.2$ and test whether their sum is equal to $0.4$.
 * Now define two numbers $a=0.2$ and $b=0.1$ and test whether their sum is equal to $0.3$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-__Solution.__
-
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -129,7 +181,7 @@ diff = diff - sum
 print(f"{diff}")
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Why is that? The reason is the way numbers are represent on a computer, which will
 be the topic of the first part of the lecture.
@@ -137,36 +189,20 @@ be the topic of the first part of the lecture.
 After the lecture I recommed you to take a look 
 [](https://0.30000000000000004.com) which discusses the phenomena we just observed in some detail.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
-## Positional System
+### Positional System
 
-+++ {"slideshow": {"slide_type": "subslide"}}
-
-On everyday base, we represent numbers using the __positional system__. For instance, when we write $145397.2346$ to denote the number
-
-$$
-145397.2346 = 
-  1 \cdot 10^5 
-+ 4 \cdot 10^4 
-+ 5 \cdot 10^3
-+ 3 \cdot 10^2 
-+ 9 \cdot 10^1
-+ 7 \cdot 10^0
-+ 2 \cdot 10^{-1}
-+ 3 \cdot 10^{-2}
-+ 4 \cdot 10^{-3}
-+ 6 \cdot 10^{-4}
-$$
-
-using $10$ as __base__. This is also known a __decimal system__. 
-
-+++ {"slideshow": {"slide_type": "slide"}}
+On everyday base, we represent numbers using the __positional system__. For instance, when we write $1234.987$ to denote the number
 
 $$ 
 1234.987 = 1 \cdot 10^{3} + 2\cdot 10^2 + 3 \cdot 10^1 + 4 \cdot 10^0 
 + 9 \cdot 10^{-1} + 8 \cdot 10^{-2} + 7 \cdot 10^{-3}
 $$
+
+using $10$ as __base__. This is also known a __decimal system__.
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 In general for any $\beta \in \mathbb{N}$, $\beta \geqslant 2$, we use
 the __positional representation__
@@ -180,7 +216,7 @@ $$
 x_{\beta} = \sum_{k=-m}^n a_k \beta^{k}. 
 $$
 
-+++ {"slideshow": {"slide_type": "subslide"}}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 Here,
 * $\beta$ is called the __base__
@@ -189,9 +225,8 @@ Here,
 * $a_n a_{n-1}\ldots a_0$ is the __integer__ part
 * $a_{-1}a_{-2}\ldots a_{-m}$ is called the __fractional__ part
 * The point between $a_0$ and $a_{-1}$ is generally called the __radix point__
- 
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise}  
 :label: ex-pos-repr 
@@ -200,16 +235,17 @@ both the base $\beta=10$ and $\beta=3$.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ```{solution} ex-pos-repr
 :class: dropdown
+
 * $\beta = 10: [3.666666666\cdots]_{10}$
 * $\beta = 3:   1 \cdot 3^{1} + 0 \cdot 3^{0} + 2 \cdot 3^{-1} = [10.2]_{3}$
 
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 To represent numbers on a computer, the most common bases are 
 * $\beta = 2$ (binary),
@@ -219,16 +255,16 @@ To represent numbers on a computer, the most common bases are
 For the latter one, one uses $1,2,\ldots, 9$, A,B,C,D,E,F to represent the digits.
 For $\beta = 2, 10, 16$ is also called the binary point, decimal point and hexadecimal point, respectively.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 We have already seen that for many (actuall most!) numbers, the fractional part can be infinitely long in order to represent the number exactly. But on a computer, only a finite amount of storage is available, so to represent numbers, only a fixed numbers of digits can be kept in storage for each number we wish to represent.
 
 This will of course automatically introduces errors whenever our number can not represented exactly by
 the finite number of digits available.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
-### Fix-point system
+### Fix-point system (fasttall system)
 
 Use $N=n+1+m$ digits/memory locations to store the number $x$ written as above.
 Since the binary/decimal point is _fixed_ , it is difficult to represent large numbers $\geqslant \beta^{n+1}$ or small numbers $ < \beta^{-m}$.
@@ -243,9 +279,9 @@ to the upper end of this range.
 
 As a remedy, an modified representation system for numbers was introduced, known as __normalized floating point system__.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
-### Normalized floating point system
+### Normalized floating point system (flyttall system)
 
 Returning to our first example: 
 $$
@@ -261,16 +297,16 @@ x = (-1)^s 0.a_1 a_2 \ldots a_t \beta^e
 $$
 
 Here,
-* $t \in \mathbb{N}$ is the number of _significant digits_ 
-* $e$ is an integer called the _exponent_ 
-* $m = a_1 a_2 \ldots a_t \in \mathbb{N}$ is known as the _mantissa_.
+* $t \in \mathbb{N}$ is the number of __significant digits__  (__gjeldene siffre__)
+* $e$ is an integer called the __exponent__ (__eksponent__)
+* $m = a_1 a_2 \ldots a_t \in \mathbb{N}$ is known as the _mantissa_. (_mantisse_)
 
 * Exponent $e$ defines the _scale_ of the represented number,
   typically, $e \in \{e_{\mathrm{min}}, \ldots, e_{\mathrm{max}}\}$,
   with $e_{\mathrm{min}} < 0$ and $e_{\mathrm{max}} > 0$.
-* Number of significant digits $t$ defines the __relative accuracy__.
+* Number of significant digits $t$ defines the __relative accuracy__ (__relativ nøyaktighet__).
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 We define the __finite__ set of available __floating point numbers__
 
@@ -281,7 +317,7 @@ $$
 
 * Typically to enforce a unique representation and to ensure maximal relative accuracy, one requires that $a_1 \neq 0$ for non-zero numbers.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise}
 :label: ex-float-num
@@ -290,7 +326,7 @@ What is the smallest (non-zero!) and the largest number you can represent with $
 
 :::
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 :::{solution} ex-float-num
 :class: dropdown
@@ -304,7 +340,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 __Conclusion:__
 
@@ -325,7 +361,7 @@ Standard machine presentations nowadays using
 * Single precision, allowing for 7-8 sigificant digits
 * Double precision, allowing for 16 sigificant digits
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Things we don't discuss in this but which are important in numerical mathematics
 

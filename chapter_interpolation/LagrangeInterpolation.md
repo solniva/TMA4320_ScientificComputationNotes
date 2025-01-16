@@ -26,7 +26,23 @@ values of the function. Polynomials are
 easy to integrate, and can be used to find approximations of integrals of more complicated
 functions. This will be exploited later in the course. And there are plenty of other applications.
 
-In this part of the course, we will only discuss **interpolation polynomials**.
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+Let's consider the following problem. The estimated mean atmospheric concentration of carbon dioxide in the earth's atmosphere
+is given in the following table.
+
+|    year       |   CO2 (ppm)    |
+| :------------ | :------------- |
+|     1800      |      280       |
+|     1850      |      283       |
+|     1900      |      291       |
+|     2000      |      370       |
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+Is there a simple method to estimate the $\mathrm{CO}_2$ concentration on (a) 1950 and (b) 2050?
+
+This is where **interpolation polynomials** comes into play!
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
@@ -174,6 +190,7 @@ In other words, we try to solve the linear system
 
 :::{math}
 :label: eq-vandermonde-sys
+
 \underbrace{
 \begin{pmatrix}
 1 & x_0 & x_0^2 & \cdots & x_0^n
@@ -204,6 +221,7 @@ y_1
 \\
 y_n
 \end{pmatrix}.
+
 :::
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
@@ -272,7 +290,7 @@ $$
 p_n(x_j) = \sum_{i=0}^n y_i \ell_i(x_j) = y_j, \qquad j=0,\dotsc,n.
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example}
 :label: exam-interpol-I
@@ -303,6 +321,11 @@ $$
 :::
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 import ipywidgets as widgets
 from ipywidgets import interact
 plt.rcParams['figure.figsize'] = [10, 5]
@@ -331,6 +354,22 @@ def plot_lagrange_basis(a, b, N):
 ```
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+a, b = 0, 3
+N = 3
+plot_lagrange_basis(a, b, N)
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 # Define a helper function to be connected with the slider
 a, b = 0, 3
 plp = lambda N : plot_lagrange_basis(a, b, N)

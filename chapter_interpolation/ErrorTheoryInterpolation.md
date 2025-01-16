@@ -12,18 +12,20 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 # Polynomial interpolation: Error theory
 
-And of course we want to import the required modules.
+We start by executing some boilerplate code. Afterwards we import
+the function `cardinal` and `lagrange` from the `polynomialinterpolation` module.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
-  slide_type: fragment
+  slide_type: slide
 ---
-%matplotlib widget
+# %matplotlib widget
 
 import numpy as np
 from numpy import pi
@@ -34,25 +36,13 @@ newparams = {'figure.figsize': (6.0, 6.0), 'axes.grid': True,
              'lines.markersize': 8, 'lines.linewidth': 2,
              'font.size': 14}
 plt.rcParams.update(newparams)
-```
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-Finally, we also run the LagrangePolynomial.ipynb to import
-the function `cardinal` and `lagrange`.
-
-```{code-cell} ipython3
----
-slideshow:
-  slide_type: fragment
----
-#%run LagrangeInterpolation.ipynb
 from polynomialinterpolation import *
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-# Theory
+## Theory
 Given some function $f\in C[a,b]$. Choose $n+1$ distinct nodes in
 $[a,b]$ and let $p_n(x) \in \mathbb{P}_n$ satisfy the interpolation
 condition
@@ -63,7 +53,7 @@ $$
 
 What can be said about the error $e(x)=f(x)-p_n(x)$?
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The goal of this section is to cover a few theoretical aspects, and to
 give the answer to the natural question:
@@ -75,14 +65,14 @@ give the answer to the natural question:
 Let us start with an numerical experiment, to have a certain feeling
 of what to expect.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Example 1: Interpolation of $\sin x$
 
-<div id="interpolation:ex:example_sin_interpolation"></div>
 Let $f(x)=\sin(x)$, $x\in [0,2\pi]$. Choose $n+1$ equidistributed
-nodes, that is $x_i=ih$, $i=0,\dots,n$, and $h=2\pi/n$. Calculate the
-interpolation polynomial by use of the functions `cardinal` and
+nodes, that is $x_i=ih$, $i=0,\dots,n$, and $h=2\pi/n$. 
+
+Calculate the interpolation polynomial using the functions `cardinal` and
 `lagrange`. Plot the error $e_n(x)=f(x)-p_n(x)$ for different values
 of $n$. Choose $n=4,8,16$ and $32$.  Notice how the error is
 distributed over the interval, and find the maximum error
@@ -90,6 +80,7 @@ $\max_{x\in[a,b]}|e_n(x)|$ for each $n$.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -99,13 +90,11 @@ def f(x):
 
 # Set the interval 
 a, b = -5, 5                  # The interpolation interval
-x = np.linspace(a, b, 101) # The 'x-axis' 
+x = np.linspace(a, b, 101)    # The 'x-axis' 
 
 # Set the interpolation points
-n = 32                         # Interpolation points
-xdata = np.linspace(a, b, n+1)     # Equidistributed nodes (can be changed)
-print(xdata)
-
+n = 32                          # Interpolation points
+xdata = np.linspace(a, b, n+1)  # Equidistributed nodes (can be changed)
 ydata = f(xdata)                
 
 # Evaluate the interpolation polynomial in the x-values
@@ -115,6 +104,7 @@ p = lagrange(ydata, l)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -134,7 +124,7 @@ plt.grid(True)
 print("Max error is {:.2e}".format(max(abs(p-f(x)))))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 <!-- --- begin exercise --- -->
 
@@ -148,20 +138,16 @@ $$
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert your code here
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-<!-- --- end exercise --- -->
-
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Error Analysis
-
-+++ {"slideshow": {"slide_type": "slide"}}
 
 **Taylor polynomials once more.**
 Before we turn to the analysis of the interpolation error
@@ -177,13 +163,13 @@ T^n_{x_0}f(x) &:= \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k
 \end{align*}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Note that the Taylor polynomial is in fact a polynomial of order $n$
 which not only interpolates $f$ in $x_0$, but also
 its first, second etc. and $n$-th derivative $f', f'', \ldots f^{(n)}$ in $x_0$!
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 So the Taylor polynomial the unique polynomial of order $n$ which
 interpolates the *first $n$ derivatives*
@@ -192,7 +178,7 @@ the interpolation polynomial $p_n$ is the unique polynomial of order $n$
 which *interpolates only the $0$-order* (that is, $f$
 itself), but in *$n$ distinctive points* $x_0, x_1,\ldots x_n$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 For the Taylor polynomial $T^n_{x_0}f(x)$ we have the error
 representation
@@ -207,7 +193,7 @@ $$
 
 with $\xi$ between $x$ and $x_0$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Of course, we usually don't know the exact location of $\xi$
 and thus not the exact error,
@@ -225,14 +211,14 @@ $$
 M=\max_{x\in[a,b]}|f^{(n+1)}(x)| \qquad \text{and} \qquad h = |x-x_0|.
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 The next theorem gives us an  expression for the interpolation
 error $e(x)=f(x)-p_n(x)$ which is similar to what we have just
 seen for the error between the Taylor polynomial and the original function
 $f$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Theorem 1: Interpolation error
 
@@ -244,7 +230,7 @@ $$
 f(x) - p_n(x) = \frac{f^{(n+1)}(\xi(x))}{(n+1)!}\prod_{i=0}^n(x-x_i).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Proof.**
 We start fromt the Newton polynomial $\omega_{n+1} =: \omega(x)$
@@ -253,7 +239,7 @@ $$
 \omega(x) = \prod_{i=0}^{n}(x-x_i) = x^{n+1} + \dotsm.
 $$
 
-+++
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 Clearly, the error in the nodes, $e(x_i)=0$. 
 Choose an *arbitrary* $x\in [a,b]$, $x\in [a,b]$, where $x\not=x_i$,
@@ -265,7 +251,7 @@ $$
 
 where $e(t) = f(t)-p_n(t)$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Notice that $\varphi(t)$ is as differentiable with respect to $t$ as $f(t)$. The
 function $\varphi(t)$ has $n+2$ distinct zeros (the nodes and the fixed x). As a
@@ -273,9 +259,9 @@ consequence of [Rolle's theorem](https://en.wikipedia.org/wiki/Rolle's_theorem),
 $\varphi'(t)$ has at least $n+1$ distinct zeros, one between each of the zeros
 of $\varphi(t)$. So $\varphi''(t)$ has $n$ distinct
 zeros, etc. By repeating this argument, we can see that $\varphi^{n+1}(t)$
-has at least one zero in $[a,b]$, let us call this $\xi(x)$, as it does depend on the fixed $x$. 
+has at least one zero in $[a,b]$, let us call this $\xi(x)$, as it does depend on the fixed $x$.
 
-+++
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
  Since
 $\omega^{(n+1)}(t)=(n+1)!$ and $e^{(n+1)}(t)=f^{(n+1)}(t)$ we obtain
@@ -286,14 +272,14 @@ $$
 
 which concludes the proof.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Observation.** The interpolation error consists of three elements: The derivative of the
 function $f$, the number of interpolation points $n+1$ and the distribution of
 the nodes $x_i$. We cannot do much with the first of these, but we can choose
 the two others. Let us first look at the most obvious choice of nodes.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Equidistributed nodes
 
@@ -314,7 +300,7 @@ for all $x\in [a,b]$.
 
 Let us now see how good this error bound is by an example.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 <!-- --- begin exercise --- -->
 
@@ -342,6 +328,7 @@ slideshow:
 # Insert your code here
 ```
 
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 <!-- --- end exercise --- -->
 
@@ -359,6 +346,7 @@ different values of $n$:
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -376,6 +364,7 @@ def omega(xdata, x):
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -391,14 +380,14 @@ plt.ylabel('omega(x)')
 print("n = {:2d}, max|omega(x)| = {:.2e}".format(n, max(abs(omega(xdata, x)))))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Run the code for different values of $n$. Notice the following: 
 * $\max_{x\in[-1,1]} |\omega(x)|$ becomes smaller with increasing $n$. 
 
 * $|\omega(x)|$ has its maximum values near the boundaries of $[-1, 1]$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 A a consequence of the latter, it seems reasonable to move the nodes towards the boundaries. 
 It can be proved that the optimal choice of nodes are the *Chebyshev-nodes*, given by
@@ -407,7 +396,7 @@ $$
 \tilde{x}_i = \cos \left( \frac{(2i+1)\pi}{2(n+1)} \right), \qquad i=0,\dotsc,n
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Let $\omega_{Cheb}(x) = \prod_{j=1}^n(x-\tilde{x}_i)$. It is then possible to prove that
 
@@ -415,9 +404,9 @@ $$
 \frac{1}{2^{n}} = \max_{x\in [-1, 1]} |\omega_{Cheb}(x)| \leq \max_{x \in [-1, 1]} |q(x)|
 $$
 
-for all polynomials $q\in \mathbb{P}_n$ such that $q(x)=x^n + c_{n-1}x^{n-1}+\dotsm+c_1x + c_0$. 
+for all polynomials $q\in \mathbb{P}_n$ such that $q(x)=x^n + c_{n-1}x^{n-1}+\dotsm+c_1x + c_0$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The distribution of nodes can be transferred to an interval $[a,b]$ by the linear transformation
 
@@ -427,7 +416,7 @@ $$
 
 where $x\in[a,b]$ and $\tilde{x} \in [-1,1]$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 By doing so we get
 
@@ -491,8 +480,10 @@ y = omega(xdata, x)
 plt.plot(x,y)
 ```
 
-```{raw-cell}
+```{code-cell} ipython3
 ---
+editable: true
+raw_mimetype: ''
 slideshow:
   slide_type: slide
 ---
@@ -514,12 +505,10 @@ print("n = {:2d}, max|omega(x)| = {:.2e}".format(n, max(abs(omega(xdata, x)))))
 **b)**
 Repeat Example 3 using Chebyshev interpolation on the functions below. Compare with the results you got from equidistributed nodes.
 
-$$
 \begin{align*}
   f(x) &= \sin(x), && x\in[0,2\pi] \\ 
   f(x) &= \frac{1}{1+x^2}, && x\in[-5,5]. 
 \end{align*}
-$$
 
 ```{code-cell} ipython3
 ---
