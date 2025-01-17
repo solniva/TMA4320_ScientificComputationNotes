@@ -81,7 +81,7 @@ This semester, we will learn about methods which helps you to e.g.
 :width: 600px
 :align: center
 ``` -->
-![SIHR simulation](sihr_sim_results_copy.png)
+![SIHR simulation](sihr_sim_results.png)
 
 ```{code-cell} ipython3
 ---
@@ -103,7 +103,7 @@ In general, we can think of Scientific as an interdisplinary, computational base
 :width: 800px
 :align: center
 ``` -->
-![Three pillars of Scientific Computing](venn_diagram_scientific_computing_copy.png)
+![Three pillars of Scientific Computing](venn_diagram_scientific_computing.png)
 
 ```{code-cell} ipython3
 ---

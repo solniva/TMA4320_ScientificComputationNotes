@@ -569,4 +569,3 @@ print("Max error is {:.2e}".format(max(abs(p-f(x)))))
 
 **For information**: 
 [Chebfun](http://www.chebfun.org/) is software package which makes it possible to manipulate functions and to solve equations with accuracy close to machine accuracy. The algorithms are based on polynomial interpolation in Chebyshev nodes.
-<!-- --- end exercise --- -->
