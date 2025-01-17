@@ -246,6 +246,7 @@ If we are basically interested in the polynomials themself, given by the coeffic
 
 :::{prf:definition}
 :label: def-lagrange-polys
+
 Given $n+1$ points  $(x_i,y_i)_{i=0}^n$ with distinct $x_i$ values. 
 The **cardinal functions** are defined by
 

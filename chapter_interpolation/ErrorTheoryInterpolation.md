@@ -87,13 +87,15 @@ slideshow:
 # Define the function
 def f(x):
     return np.sin(x)
+    # return 1/(1+x**2)
+    
 
 # Set the interval 
 a, b = -5, 5                  # The interpolation interval
 x = np.linspace(a, b, 101)    # The 'x-axis' 
 
 # Set the interpolation points
-n = 32                          # Interpolation points
+n = 6                          # Interpolation points
 xdata = np.linspace(a, b, n+1)  # Equidistributed nodes (can be changed)
 ydata = f(xdata)                
 
@@ -144,6 +146,62 @@ slideshow:
 ---
 # Insert your code here
 ```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+# Define the function
+def r(x):
+    return 1/(1+x**2)
+    
+# Set the interval 
+a, b = -5, 5                  # The interpolation interval
+x = np.linspace(a, b, 101)    # The 'x-axis' 
+
+# Set the interpolation points
+n = 10                          # Interpolation points
+xdata = np.linspace(a, b, n+1)  # Equidistributed nodes (can be changed)
+ydata = r(xdata)                
+
+# Evaluate the interpolation polynomial in the x-values
+l = cardinal(xdata, x)  
+p = lagrange(ydata, l)
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+# Plot rx) og p(x) and the interpolation points
+plt.figure()
+plt.subplot(2,1,1)                  
+plt.plot(x, r(x), x, p, xdata, ydata, 'o')
+plt.legend(['f(x)','p(x)'])
+plt.grid(True)
+
+# Plot the interpolation error
+plt.subplot(2,1,2)
+plt.plot(x, (r(x)-p))
+plt.xlabel('x')
+plt.ylabel('Error: r(x)-p(x)')
+plt.grid(True)
+print("Max error is {:.2e}".format(max(abs(p-r(x)))))
+```
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+:::{prf:observation}
+
+We see that approximation of Runge's functions is much worse then for the $\sin(x)$ function and is not uniformly bounded. In fact, it seems that
+the maximum error does not decrease with an increasing number of (uniformly distributed!) interpolation nodes, but the large errors are squeezed more and more
+towards to interval endpoints.
+
+:::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
