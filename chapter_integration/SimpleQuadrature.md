@@ -608,7 +608,7 @@ qr_tuple = namedtuple("qr_tuple", ["name", "xq", "wq"])
 
 quadrature_rules =  [
     qr_tuple(name = "left endpoint rule", xq=[0], wq=[1]), 
-    qr_tuple(name = "right endpoint rule", xq=[1], wq=[1]),
+    qr_tuple(name = "right endpoint rule", xq=[1], wq=[1])
 ]
 print(quadrature_rules)
 
@@ -702,11 +702,11 @@ for n in range(5):
 
 :::{prf:observation}
 (Will be updated after the mentimeter!)
- * left and right end point rule have degree of exactness = 
- * mid point rule has degree of exactness = 
- * trapezoidal rule has degree of exactness = 
- * Gauß-Legendre rule has degree of exactness = 
- * Simpson rule has degree of exactness = 
+ * left and right end point rule have degree of exactness = 0
+ * mid point rule has degree of exactness = 1
+ * trapezoidal rule has degree of exactness = 1 
+ * Gauß-Legendre rule has degree of exactness = 3 
+ * Simpson rule has degree of exactness = 3
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}

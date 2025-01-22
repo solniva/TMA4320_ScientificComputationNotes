@@ -16,7 +16,7 @@ kernelspec:
 
 ## Numerical integration: Composite quadrature rules
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 As usual, we import the necessary modules before we get started.
 
@@ -48,41 +48,41 @@ plt.rcParams.update(newparams)
 #plt.xkcd()
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### General construction of quadrature rules
 In the following, you will learn the steps on how to construct realistic
 algorithms for numerical integration, similar to those used in software like
 Matlab of SciPy.  The steps are:
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Construction.**
 
 1. Choose $n+1$ distinct nodes on a standard interval $I$, often chosen to be $I=[-1,1]$.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 2. Let $p_n(x)$ be the polynomial interpolating some general function $f$ in the nodes, and let the  $Q[f](-1,1)=I[p_n](-1,1)$.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 3. Transfer the formula $Q$ from $[-1,1]$ to some interval $[a,b]$.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 4. Design a composite formula, by dividing the interval $[a,b]$ into
   subintervals and applying the quadrature formula on each subinterval.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 5. Find an expression for the error $E[f](a,b) = I[f](a,b)-Q[f](a,b)$. 
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 6. Find an expression for an estimate of the error, and use this to create an adaptive algorithm.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Constructing quadrature rules on a single interval
 
@@ -90,7 +90,7 @@ We have already seen in the previous Lecture how quadrature rules
 on a given interval $[a,b]$ can be constructed using polynomial
 interpolation.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 For $n+1$ quadrature points $\{x_i\}_{i=0}^n \subset [a,b]$,
 we compute weights by
@@ -105,7 +105,7 @@ $i,j = 0,1,\ldots, n$.
 The resulting quadrature rule has (at least) degree of exactness
 equal to $n$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 But how to you proceed if you know want to
 compute an integral on a different interval, say
@@ -113,7 +113,7 @@ $[c,d]$?
 Do we have to reconstruct all the cardinal functions and recompute
 the weights?
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 The answer is NO! One can easily transfer quadrature points and weights
 from one interval to another.
@@ -122,7 +122,7 @@ Then you determine some $n+1$ quadrature points
 $\{\widehat{x}_i\}_{i=0}^n \subset [-1,1]$ and quadrature weights
 $\{\widehat{w}_i\}_{i=0}^n$ to define a quadrature rule $Q(\widehat{I})$
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 The quadrature points can then be transferred to an arbitrary interval
 $[a,b]$ to define a quadrature rule $Q(a,b)$ using the transformation
@@ -131,7 +131,7 @@ $$
 x = \frac{b-a}{2}\widehat{x} + \frac{b+a}{2}, \quad  \text{so} \quad {\,\mathrm{d}x} = \frac{b-a}{2}\,\mathrm{d}\widehat{x},
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 and thus we define
 $\{x_i\}_{i=0}^n$
@@ -166,21 +166,21 @@ $$
 
   * $ \displaystyle \int_{-1}^1 f(t) dx \approx \int_{-1}^1 p_2(x) dx = \sum_{i=0}^2 w_i f(x_i) = \frac{1}{3} \left[\; f(-1) + 4 f(0) + f(1) \; \right].$
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 * After transferring the nodes and weights,
   Simpson's rule over the interval $[a,b]$ becomes
 
   * $\displaystyle S(a,b) = \frac{b-a}{6}\left[\; f(a)+4f(c)+f(b)\; \right], \qquad c=\frac{b+a}{2}$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Composite quadrature rules
 To generate more accurate quadrature rule $Q(a,b)$
 we have in principle two possibilities:
 * Increase the order of the interpolation polynomial used to construct the quadrature rule.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 * Subdivide the interval $[a,b]$ into smaller subintervals and apply a quadrature rule on each of
   the subintervals, leading to **Composite Quadrature Rules** which we will consider next.
@@ -262,7 +262,7 @@ m = 4
 plot_cqr_examples(m)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Select $m \geqslant 1$ and divide $[a,b]$ into $m$ equally spaced
 subintervals $[x_{i-1}, x_{i}]$ defined by $x_i = a + i h$ with $h =
@@ -270,11 +270,11 @@ subintervals $[x_{i-1}, x_{i}]$ defined by $x_i = a + i h$ with $h =
 Then for a given quadrature rule $\mathrm{Q}[\cdot](x_{i-1},x_i)$ the corresponding
 composite quadrature rule $\mathrm{CQ}[\cdot]({[x_{i-1}, x_{i}]}_{i=1}^{m})$ is given by
 
-\begin{equation}
+$$
 \int_a^b f {\,\mathrm{d}x} \approx \mathrm{CQ}[f]({[x_{i-1}, x_{i}]}_{i=1}^{m}) = \sum_{i=1}^m \mathrm{Q}[f](x_{i-1},x_i).
-\end{equation}(eqquad:composite_qr}
+$$ (eqquad:composite_qr}
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ## Composite trapezoidal rule
 Using the trapezoidal rule
@@ -291,7 +291,7 @@ the resulting composite trapezoidal rule is given by
 = h \left[ \tfrac{1}{2} f(x_0) + f(x_1) + \ldots + f(x_{m-1}) + \tfrac{1}{2} f(x_m) \right]
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise-start} Testing the accuracy of the composite trapezoidal rule
 :label: exe-test-accur-ctr
@@ -321,7 +321,7 @@ def CT(f, a, b, m):
     return ct
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Use this function to compute an approximate value of integral
 
@@ -373,7 +373,7 @@ for m in [4, 8, 16, 32, 64]:
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:remark}
 
@@ -394,7 +394,7 @@ $|I[f]-\mathrm{CT}[f]| \approx \tfrac{C}{m^2} = C h^2$.
 We will now theoretically explain the experimentally observed
 convergence rate in the previous {ref}`exe-test-accur-ctr`.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 First we have to recall the error estimate for
 for the trapezoidal rule on a **single interval** $[a,b]$.
@@ -404,7 +404,7 @@ $$
 I[f]-\mathrm{T}[f]=\frac{(b-a)^3}{12}f''(\xi).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:theorem} Quadrature error estimate for composite trapezoidal rule
 :label: thm-ctr-error-est
@@ -420,18 +420,16 @@ for the composite trapezoidal rule can be estimated by
 =
 \dfrac{M_2}{12}
 h^2(b-a)
-\label{quad:thm:ctr_est} \tag{2}
 \end{equation}
 
 where  $M_2 = \max_{\xi\in[a,b]} |f''(\xi)|$.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:proof}
-:class: dropdown
 
-$$
+
 \begin{align*}
 |I[f]-\mathrm{CT}[f]|
 &=
@@ -453,6 +451,9 @@ $$
 \leqslant 
 M_2 \sum_{i=1}^m
 \frac{(h)^3}{12}
+\leqslant 
+M_2 \sum_{i=1}^m
+\frac{(h)^3}{12}
 \\ 
 &=
 M_2 
@@ -464,12 +465,11 @@ h^2(b-a)
 =
 \frac{M_2}{12}
 \frac{(b-a)^3}{m^2}
-\end{align*}.
-$$
+\end{align*}
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Interlude: Convergence of $h$-dependent approximations
 
@@ -480,7 +480,7 @@ $$
 e(h) \leq M h^p
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 This is often expresed using the Big $\mathcal{O}$-notation, 
 $$
@@ -491,7 +491,7 @@ This is often used when we are not directly interested in any expression for the
 
 Again, we see that a higher approximation order $p$ leads for small values of $h$ to a better approximation of the solution. Thus we are generally interested in approximations of higher order.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Numerical verification**
 
@@ -514,7 +514,7 @@ $$
   p \approx \frac{\log{(e(h_{k+1})/e(h_k))}}{\log{(h_{k+1}/h_k)}}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 For one refinement step where one passes from $h_k \to h_{k+1}$, the number
 $$
@@ -522,7 +522,7 @@ EOC(k) \approx \frac{\log{(e(h_{k+1})/e(h_k))}}{\log{(h_{k+1}/h_k)}}
 $$
 is often called the "**Experimental order of convergence** at refinement level k"
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Since
 $$
@@ -533,7 +533,7 @@ a plot of $e(h)$ as a function of $h$ using a logarithmic scale on both axes (a 
 will be a straight line with slope $p$. Such a plot is referred to as
 an *error plot* or a *convergence plot*.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise} Convergence order of composite trapezoidal rule
 :label: exe-ctr-eoc
@@ -550,7 +550,7 @@ slideshow:
 # Insert your code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{solution-start} exe-ctr-eoc
 :::
@@ -614,7 +614,12 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
+:::{solution-end}
+:::
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise} Composite Simpson's rule
 
@@ -622,7 +627,7 @@ The composite Simpson's rule is considered in detail in homework assignment 2.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:theorem} Quadrature error estimate for composite Simpon's rule
 :label: thm-csr-err-estim
