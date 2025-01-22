@@ -22,8 +22,9 @@ As usual, we import the necessary modules before we get started.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
-  slide_type: fragment
+  slide_type: slide
 ---
 %matplotlib inline
 
@@ -47,42 +48,41 @@ plt.rcParams.update(newparams)
 #plt.xkcd()
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### General construction of quadrature rules
 In the following, you will learn the steps on how to construct realistic
 algorithms for numerical integration, similar to those used in software like
 Matlab of SciPy.  The steps are:
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Construction.**
 
 1. Choose $n+1$ distinct nodes on a standard interval $I$, often chosen to be $I=[-1,1]$.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 2. Let $p_n(x)$ be the polynomial interpolating some general function $f$ in the nodes, and let the  $Q[f](-1,1)=I[p_n](-1,1)$.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 3. Transfer the formula $Q$ from $[-1,1]$ to some interval $[a,b]$.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 4. Design a composite formula, by dividing the interval $[a,b]$ into
   subintervals and applying the quadrature formula on each subinterval.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 5. Find an expression for the error $E[f](a,b) = I[f](a,b)-Q[f](a,b)$. 
 
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
+
 6. Find an expression for an estimate of the error, and use this to create an adaptive algorithm.
 
-
-In this course, we will not have the time to cover the last two steps.
-
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Constructing quadrature rules on a single interval
 
@@ -90,7 +90,7 @@ We have already seen in the previous Lecture how quadrature rules
 on a given interval $[a,b]$ can be constructed using polynomial
 interpolation.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 For $n+1$ quadrature points $\{x_i\}_{i=0}^n \subset [a,b]$,
 we compute weights by
@@ -105,7 +105,7 @@ $i,j = 0,1,\ldots, n$.
 The resulting quadrature rule has (at least) degree of exactness
 equal to $n$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 But how to you proceed if you know want to
 compute an integral on a different interval, say
@@ -113,7 +113,7 @@ $[c,d]$?
 Do we have to reconstruct all the cardinal functions and recompute
 the weights?
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 The answer is NO! One can easily transfer quadrature points and weights
 from one interval to another.
@@ -122,7 +122,7 @@ Then you determine some $n+1$ quadrature points
 $\{\widehat{x}_i\}_{i=0}^n \subset [-1,1]$ and quadrature weights
 $\{\widehat{w}_i\}_{i=0}^n$ to define a quadrature rule $Q(\widehat{I})$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 The quadrature points can then be transferred to an arbitrary interval
 $[a,b]$ to define a quadrature rule $Q(a,b)$ using the transformation
@@ -131,7 +131,7 @@ $$
 x = \frac{b-a}{2}\widehat{x} + \frac{b+a}{2}, \quad  \text{so} \quad {\,\mathrm{d}x} = \frac{b-a}{2}\,\mathrm{d}\widehat{x},
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 and thus we define
 $\{x_i\}_{i=0}^n$
@@ -166,27 +166,28 @@ $$
 
   * $ \displaystyle \int_{-1}^1 f(t) dx \approx \int_{-1}^1 p_2(x) dx = \sum_{i=0}^2 w_i f(x_i) = \frac{1}{3} \left[\; f(-1) + 4 f(0) + f(1) \; \right].$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 * After transferring the nodes and weights,
   Simpson's rule over the interval $[a,b]$ becomes
 
   * $\displaystyle S(a,b) = \frac{b-a}{6}\left[\; f(a)+4f(c)+f(b)\; \right], \qquad c=\frac{b+a}{2}$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Composite quadrature rules
 To generate more accurate quadrature rule $Q(a,b)$
 we have in principle two possibilities:
 * Increase the order of the interpolation polynomial used to construct the quadrature rule.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 * Subdivide the interval $[a,b]$ into smaller subintervals and apply a quadrature rule on each of
   the subintervals, leading to **Composite Quadrature Rules** which we will consider next.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -235,6 +236,11 @@ def plot_cqr_examples(m):
 ```
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 import ipywidgets as widgets
 from ipywidgets import interact
 
@@ -248,6 +254,7 @@ interact(plot_cqr_examples, m=slider)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -255,9 +262,9 @@ m = 4
 plot_cqr_examples(m)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-Select $m \geqslant 2$ and divide $[a,b]$ into $m$ equally spaced
+Select $m \geqslant 1$ and divide $[a,b]$ into $m$ equally spaced
 subintervals $[x_{i-1}, x_{i}]$ defined by $x_i = a + i h$ with $h =
 (b-a)/m$ for $i=1,\ldots, m$.
 Then for a given quadrature rule $\mathrm{Q}[\cdot](x_{i-1},x_i)$ the corresponding
@@ -266,6 +273,8 @@ composite quadrature rule $\mathrm{CQ}[\cdot]({[x_{i-1}, x_{i}]}_{i=1}^{m})$ is 
 \begin{equation}
 \int_a^b f {\,\mathrm{d}x} \approx \mathrm{CQ}[f]({[x_{i-1}, x_{i}]}_{i=1}^{m}) = \sum_{i=1}^m \mathrm{Q}[f](x_{i-1},x_i).
 \end{equation}(eqquad:composite_qr}
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Composite trapezoidal rule
 Using the trapezoidal rule
@@ -282,7 +291,7 @@ the resulting composite trapezoidal rule is given by
 = h \left[ \tfrac{1}{2} f(x_0) + f(x_1) + \ldots + f(x_{m-1}) + \tfrac{1}{2} f(x_m) \right]
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise-start} Testing the accuracy of the composite trapezoidal rule
 :label: exe-test-accur-ctr
@@ -292,6 +301,7 @@ Have a look at the `CT` function which implements the composite trapezoidal rule
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -311,7 +321,7 @@ def CT(f, a, b, m):
     return ct
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Use this function to compute an approximate value of integral
 
@@ -328,8 +338,15 @@ What do you observe?
 :::
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
 # Insert your code here
 ```
+
++++ {"editable": true, "slideshow": {"slide_type": ""}}
 
 :::{solution} exe-test-accur-ctr
 :class: dropdown
@@ -356,7 +373,7 @@ for m in [4, 8, 16, 32, 64]:
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:remark}
 
@@ -377,17 +394,17 @@ $|I[f]-\mathrm{CT}[f]| \approx \tfrac{C}{m^2} = C h^2$.
 We will now theoretically explain the experimentally observed
 convergence rate in the previous {ref}`exe-test-accur-ctr`.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 First we have to recall the error estimate for
-for the trapezoidal rule on a single interval $[a,b]$.
+for the trapezoidal rule on a **single interval** $[a,b]$.
 If $f\in C^2(a,b)$, then there is a $\xi \in (a,b)$ such that
 
 $$
 I[f]-\mathrm{T}[f]=\frac{(b-a)^3}{12}f''(\xi).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:theorem} Quadrature error estimate for composite trapezoidal rule
 :label: thm-ctr-error-est
@@ -409,7 +426,7 @@ h^2(b-a)
 where  $M_2 = \max_{\xi\in[a,b]} |f''(\xi)|$.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:proof}
 :class: dropdown
@@ -463,9 +480,9 @@ $$
 e(h) \leq M h^p
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-The Big $\mathcal{O}$-notation we can simply write
+This is often expresed using the Big $\mathcal{O}$-notation, 
 $$
 e(h) = \mathcal{O}(h^p)
 \qquad\text{ as } h \to 0.
@@ -474,7 +491,7 @@ This is often used when we are not directly interested in any expression for the
 
 Again, we see that a higher approximation order $p$ leads for small values of $h$ to a better approximation of the solution. Thus we are generally interested in approximations of higher order.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Numerical verification**
 
@@ -487,7 +504,7 @@ error for a decreasing sequence of $h_k$'s, for instance $h_k=H/2^k$,
 $k=0,1,2,\dots$. The procedure is then quite similar to what was done for
 iterative processes.
 
-+++
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 $$
 \begin{array}{rcl} e(h_{k+1}) &\approx& C h_{k+1}^p \\  e(h_k) &\approx& C h_k^p \end{array}
@@ -497,15 +514,15 @@ $$
   p \approx \frac{\log{(e(h_{k+1})/e(h_k))}}{\log{(h_{k+1}/h_k)}}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 For one refinement step where one passes from $h_k \to h_{k+1}$, the number
 $$
 EOC(k) \approx \frac{\log{(e(h_{k+1})/e(h_k))}}{\log{(h_{k+1}/h_k)}}
 $$
-is often called the "Experimental order of convergence at refinement level k"
+is often called the "**Experimental order of convergence** at refinement level k"
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Since
 $$
@@ -516,7 +533,7 @@ a plot of $e(h)$ as a function of $h$ using a logarithmic scale on both axes (a 
 will be a straight line with slope $p$. Such a plot is referred to as
 an *error plot* or a *convergence plot*.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Convergence order of composite trapezoidal rule
 :label: exe-ctr-eoc
@@ -526,58 +543,23 @@ Examine the convergence order of composite trapezoidal rule.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert your code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-:::{solution} exe-ctr-eoc
-
-:::{code-block} python
-# Define function
-def f(x):
-    return np.cos(pi*x/2)
-
-# Exact integral
-int_f = 2/pi 
-
-# Interval
-a, b = 0, 1
-
-errs = []
-hs = []
-
-# Compute integral numerically
-for m in [4, 8, 16, 32, 64]:
-    cqr_f = CT(f, a, b, m)
-    print("Number of subintervals m = {}".format(m))
-    print("Q[f] = {}".format(cqr_f))
-    err = int_f - cqr_f
-    errs.append(err)
-    hs.append((b-a)/m)
-    print("I[f] - Q[f] = {:.10e}".format(err))
-
-hs = np.array(hs)
-errs = np.array(errs)
-
-eocs = np.log(errs[1:]/errs[:-1])/np.log(hs[1:]/hs[:-1])
-print(eocs)
-plt.loglog(hs, errs, "bo-")
-plt.xlabel("log(h)")
-plt.ylabel("log(err)")
-
-# Adding infinity in first row to eoc list
-# to make it the same length as errs
-eocs = np.insert(eocs, 0, np.inf)
+:::{solution-start} exe-ctr-eoc
 :::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
-  slide_type: fragment
+  slide_type: slide
 ---
 # Define function
 def f(x):
@@ -618,6 +600,11 @@ eocs = np.insert(eocs, 0, np.inf)
 ```
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 # Do a pretty print of the tables using panda
 import pandas as pd
 #from IPython.display import display
@@ -627,7 +614,7 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Composite Simpson's rule
 
@@ -635,7 +622,7 @@ The composite Simpson's rule is considered in detail in homework assignment 2.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:theorem} Quadrature error estimate for composite Simpon's rule
 :label: thm-csr-err-estim
