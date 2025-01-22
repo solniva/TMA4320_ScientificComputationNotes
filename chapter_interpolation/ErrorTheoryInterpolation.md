@@ -14,10 +14,10 @@ kernelspec:
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-# Polynomial interpolation: Error theory
+## Polynomial interpolation: Error theory
 
-We start by executing some boilerplate code. Afterwards we import
-the function `cardinal` and `lagrange` from the `polynomialinterpolation` module.
+We start by executing some boilerplate code. Afterwards we recall the definition
+of the `python` function `cardinal` and `lagrange` from the previous lecture.
 
 ```{code-cell} ipython3
 ---
@@ -36,13 +36,47 @@ newparams = {'figure.figsize': (6.0, 6.0), 'axes.grid': True,
              'lines.markersize': 8, 'lines.linewidth': 2,
              'font.size': 14}
 plt.rcParams.update(newparams)
+```
 
-from polynomialinterpolation import *
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+def cardinal(xdata, x):
+    """
+    cardinal(xdata, x): 
+    In: xdata, array with the nodes x_i.
+        x, array or a scalar of values in which the cardinal functions are evaluated.
+    Return: l: a list of arrays of the cardinal functions evaluated in x. 
+    """
+    n = len(xdata)              # Number of evaluation points x
+    l = []
+    for i in range(n):          # Loop over the cardinal functions
+        li = np.ones(len(x))
+        for j in range(n):      # Loop to make the product for l_i
+            if i is not j:
+                li = li*(x-xdata[j])/(xdata[i]-xdata[j])
+        l.append(li)            # Append the array to the list            
+    return l
+
+def lagrange(ydata, l):
+    """
+    lagrange(ydata, l):
+    In: ydata, array of the y-values of the interpolation points.
+         l, a list of the cardinal functions, given by cardinal(xdata, x)
+    Return: An array with the interpolation polynomial. 
+    """
+    poly = 0                        
+    for i in range(len(ydata)):
+        poly = poly + ydata[i]*l[i]  
+    return poly
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Theory
+### Error Theory
 Given some function $f\in C[a,b]$. Choose $n+1$ distinct nodes in
 $[a,b]$ and let $p_n(x) \in \mathbb{P}_n$ satisfy the interpolation
 condition
@@ -67,7 +101,8 @@ of what to expect.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Example 1: Interpolation of $\sin x$
+:::{prf:example} Interpolation of $\sin x$
+:label: exa-interpol-sin
 
 Let $f(x)=\sin(x)$, $x\in [0,2\pi]$. Choose $n+1$ equidistributed
 nodes, that is $x_i=ih$, $i=0,\dots,n$, and $h=2\pi/n$. 
@@ -78,6 +113,8 @@ of $n$. Choose $n=4,8,16$ and $32$.  Notice how the error is
 distributed over the interval, and find the maximum error
 $\max_{x\in[a,b]}|e_n(x)|$ for each $n$.
 
+:::
+
 ```{code-cell} ipython3
 ---
 editable: true
@@ -87,7 +124,6 @@ slideshow:
 # Define the function
 def f(x):
     return np.sin(x)
-    # return 1/(1+x**2)
     
 
 # Set the interval 
@@ -128,9 +164,8 @@ print("Max error is {:.2e}".format(max(abs(p-f(x)))))
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-<!-- --- begin exercise --- -->
-
-## Exercise 1: Interpolation of $\tfrac{1}{1+x^2}$
+:::{exercise} Interpolation of $\tfrac{1}{1+x^2}$
+:label: exe-interpol-runge
 
 Repeat the previous experiment with Runge's function
 
@@ -147,6 +182,9 @@ slideshow:
 # Insert your code here
 ```
 
+:::{solution-start} exe-interpol-runge
+:::
+
 ```{code-cell} ipython3
 ---
 editable: true
@@ -162,7 +200,7 @@ a, b = -5, 5                  # The interpolation interval
 x = np.linspace(a, b, 101)    # The 'x-axis' 
 
 # Set the interpolation points
-n = 10                          # Interpolation points
+n = 10                            # Interpolation points
 xdata = np.linspace(a, b, n+1)  # Equidistributed nodes (can be changed)
 ydata = r(xdata)                
 
@@ -193,6 +231,9 @@ plt.grid(True)
 print("Max error is {:.2e}".format(max(abs(p-r(x)))))
 ```
 
+:::{solution-end}
+:::
+
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:observation}
@@ -204,8 +245,6 @@ towards to interval endpoints.
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
-
-## Error Analysis
 
 **Taylor polynomials once more.**
 Before we turn to the analysis of the interpolation error
@@ -278,7 +317,8 @@ $f$.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Theorem 1: Interpolation error
+:::{prf:theorem} Interpolation error
+:label: thm-interpol-error
 
 Given $f \in C^{(n+1)}[a,b]$. Let $p_{n} \in \mathbb{P}_n$ interpolate $f$ in
 $n+1$ distinct nodes $x_i \in [a,b]$. For each $x\in [a,b]$ there is at least
@@ -291,6 +331,7 @@ $$
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Proof.**
+
 We start fromt the Newton polynomial $\omega_{n+1} =: \omega(x)$
 
 $$
@@ -332,16 +373,20 @@ which concludes the proof.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-**Observation.** The interpolation error consists of three elements: The derivative of the
+ :::{prf:observation}
+
+The interpolation error consists of three elements: The derivative of the
 function $f$, the number of interpolation points $n+1$ and the distribution of
 the nodes $x_i$. We cannot do much with the first of these, but we can choose
 the two others. Let us first look at the most obvious choice of nodes.
+
+:::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Equidistributed nodes
 
-The nodes are *equidistributed* over the interval $[a,b]$ if $x_i=a+ih$, $h=(b-a)/n$. In this case it can
+The nodes are *equidistributed* over the interval $[a,b]$ if $x_i=a+ih$, $h=(b-a)/n$, $i=0,\ldots, n$ In this case it can
 be proved that:
 
 $$
@@ -360,12 +405,11 @@ Let us now see how good this error bound is by an example.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-<!-- --- begin exercise --- -->
-
-## Exercise 2: Interpolation error for $\sin(x)$ revisited
+:::{exercise} Interpolation error for $\sin(x)$ revisited
+:label: exe-interpol-sin
 
 Let again $f(x)=\sin(x)$ and $p_n(x)$ the polynomial interpolating $f(x)$ in
-$n+1$ equidistributed points on $[0,1]$.
+$n+1$ equidistributed points on $ [a,b] = [0,2\pi]$.
 An upper bound for the error for different values of $n$
 can be found easily. Clearly,
 $\max_{x\in[0,2\pi]}|f^{(n+1)}(x)|=M=1$ for all $n$, so
@@ -377,6 +421,7 @@ $$
 
 Use the code in the first Example of this lecture to verify the result
 for $n = 2, 4, 8, 16$. How close is the bound to the real error?
+:::
 
 ```{code-cell} ipython3
 ---
@@ -388,12 +433,9 @@ slideshow:
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
-<!-- --- end exercise --- -->
-
-
-## Optimal choice of interpolation points
+### Optimal choice of interpolation points
 So how can the error be reduced? For a given $n$ there is only one choice: to
-distribute the nodes in order to make
+distribute the nodes in order to make the maximum of
 $|\omega(x)|= \prod_{j=0}^{n}|x-x_i|$ as small as possible. We will first do this
 on a standard interval $[-1,1]$, and then transfer the results to some arbitrary
 interval $[a,b]$.
@@ -427,7 +469,7 @@ slideshow:
   slide_type: slide
 ---
 # Plot omega(x) 
-n = 32                           # Number of interpolation points is n+1
+n = 10                           # Number of interpolation points is n+1
 a, b = -1, 1                    # The interval
 x = np.linspace(a, b, 501)        
 xdata = np.linspace(a, b, n) 
@@ -484,11 +526,11 @@ $$
   = \left(\frac{b-a}{2}\right)^{n+1} \omega_{Cheb}(\tilde{x}).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 From the theorem on interpolation errors we can conclude:
 
-**Theorem (interpolation error for Chebyshev interpolation).**
+:::{prf:theorem} Interpolation error for Chebyshev interpolation
 
 Given $f \in C^{(n+1)}[a,b]$, and let $M_{n+1} = \max_{x\in [a,b]}|f^{(n+1)}(x)|$.  Let $p_{n} \in \mathbb{P}_n$ interpolate $f$ i $n+1$ Chebyshev-nodes $x_i \in [a,b]$. Then
 
@@ -496,10 +538,13 @@ $$
 \max_{x\in[a,b]}|f(x) - p_n(x)| \leq \frac{(b-a)^{n+1}}{2^{2n+1}(n+1)!} M_{n+1}.
 $$
 
+:::
+
 The Chebyshev nodes over an interval $[a,b]$ are evaluated in the following function:
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -512,53 +557,11 @@ def chebyshev_nodes(a, b, n):
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-<!-- --- begin exercise --- -->
-
-## Exercise 3: Chebyshev interpolation
-
+:::{exercise} Chebyshev interpolation
+:label: exe-cheby-interpol
 
 **a)**
 Plot $\omega_{Cheb}(x)$ for $3, 5, 9, 17$ interpolation points on the interval $[-1,1]$.
-
-```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
-import numpy as np
-# Insert your code here
-n = 16                           # Number of interpolation points is n+1
-a, b = -1, 1                    # The interval
-x = np.linspace(a, b, 501)  
-# equidistributes nodes
-xdata = np.linspace(a, b, n+1)
-# Change xdata to Chebychev nodes
-
-y = omega(xdata, x)
-plt.plot(x,y)
-```
-
-```{code-cell} ipython3
----
-editable: true
-raw_mimetype: ''
-slideshow:
-  slide_type: slide
----
-# Plot omega(x) 
-n = 16                           # Number of interpolation points is n+1
-a, b = -1, 1                    # The interval
-x = np.linspace(a, b, 501)        
-xdata = chebyshev_nodes(a, b, n) 
-plt.plot(x, omega(xdata, x))
-plt.plot(xdata,omega(xdata, xdata), "o")
-plt.grid(True)
-plt.xlabel('$x$')
-plt.ylabel('$\omega_{Cheb}(x)$')
-print("n = {:2d}, max|omega(x)| = {:.2e}".format(n, max(abs(omega(xdata, x)))))
-```
-
-+++ {"slideshow": {"slide_type": "slide"}}
 
 **b)**
 Repeat Example 3 using Chebyshev interpolation on the functions below. Compare with the results you got from equidistributed nodes.
@@ -568,12 +571,26 @@ Repeat Example 3 using Chebyshev interpolation on the functions below. Compare w
   f(x) &= \frac{1}{1+x^2}, && x\in[-5,5]. 
 \end{align*}
 
+:::
+
++++
+
+:::{solution-start} exe-cheby-interpol
+:::
+
+**a)** Let's plot  $\omega(x)$  first for $n$ equidistributed nodes and then $\omega_{Cheb}(x)$ for $5, 9, 17, 25$ interpolation points on the interval $[-1,1]$.
+
 ```{code-cell} ipython3
 ---
 slideshow:
   slide_type: slide
 ---
 # Insert your code here
+# Define number of interpolation points
+n = 9
+# 
+a, b = -1, 1                    # The interval
+x = np.linspace(a, b, 501)
 ```
 
 ```{code-cell} ipython3
@@ -581,21 +598,64 @@ slideshow:
 slideshow:
   slide_type: slide
 ---
+# equidistributes nodes
+xdata = np.linspace(a, b, n) 
+
+plt.plot(x, omega(xdata, x))
+plt.plot(xdata,omega(xdata, xdata), "o")
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('omega(x)')
+print("n = {:2d}, max|omega(x)| = {:.2e}".format(n, max(abs(omega(xdata, x)))))
+```
+
+```{code-cell} ipython3
+---
+editable: true
+raw_mimetype: ''
+slideshow:
+  slide_type: slide
+---
+# Chebyshev nodes
+xdata = chebyshev_nodes(a, b, n) 
+
+plt.plot(x, omega(xdata, x))
+plt.plot(xdata,omega(xdata, xdata), "o")
+plt.grid(True)
+plt.xlabel('x')
+plt.ylabel('omega(x)')
+print("n = {:2d}, max|omega(x)| = {:.2e}".format(n, max(abs(omega(xdata, x)))))
+```
+
+**b)** 
+Let's interpolate the following functions
+
+\begin{align*}
+  f(x) &= \sin(x), && x\in[0,2\pi] \\ 
+  f(x) &= \frac{1}{1+x^2}, && x\in[-5,5]. 
+\end{align*}
+
+using Chebyshev interpolation nodes.
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 # Define the function
 def f(x):
-    #return np.sin(x)
     return 1/(1+x**2)
-
 
 # Set the interval 
 a, b = -5, 5                  # The interpolation interval
-#a, b = 0, 2*pi                  # The interpolation interval
+#a, b = 0, 2*pi               # The interpolation interval
 x = np.linspace(a, b, 101) # The 'x-axis' 
 
 # Set the interpolation points
 n = 16                         # Interpolation points
-#xdata = np.linspace(a, b, n+1) # Equidistributed nodes (can be changed)
-xdata = chebyshev_nodes(a, b, n+1)
+#xdata = np.linspace(a, b, n) # Equidistributed nodes (can be changed)
+xdata = chebyshev_nodes(a, b, n)
 ydata = f(xdata)                
 
 # Evaluate the interpolation polynomial in the x-values
@@ -623,7 +683,19 @@ plt.grid(True)
 print("Max error is {:.2e}".format(max(abs(p-f(x)))))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
+:::{solution-end}
+:::
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **For information**: 
 [Chebfun](http://www.chebfun.org/) is software package which makes it possible to manipulate functions and to solve equations with accuracy close to machine accuracy. The algorithms are based on polynomial interpolation in Chebyshev nodes.
+
++++ {"editable": true, "slideshow": {"slide_type": "skip"}}
+
+:::{admonition} TODO
+:class: danger dropdown
+
+Add ipywidgets slider for better visualization/interactivity.
+
+:::

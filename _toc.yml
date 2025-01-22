@@ -8,4 +8,9 @@ chapters:
 - file: chapter_interpolation/LagrangeInterpolation
   sections:
   - file: chapter_interpolation/ErrorTheoryInterpolation
+- file: chapter_integration/SimpleQuadrature
+  sections:
+  - file: chapter_integration/CompositeQuadrature
+  # - file: chapter_integration/AdaptiveQuadrature
+  # - file: chapter_integration/GaussQuadrature
 - file: references

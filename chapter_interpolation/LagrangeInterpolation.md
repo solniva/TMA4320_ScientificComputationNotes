@@ -51,10 +51,10 @@ This is where **interpolation polynomials** comes into play!
 Given $n+1$ points $(x_i,y_i)_{i=0}^n$, find a polynomial $p(x)$ of
 lowest possible degree satisfying the **interpolation condition**
 
-:::{math}
-:label: interpol-condition 
+$$
     p(x_i) = y_i,\qquad i=0,\dotsc, n. 
-:::
+$$ (interpol-condition) 
+
 
 The solution $p(x)$ is called the **interpolation polynomial**, the $x_i$ values
 are called **nodes**, and the points $(x_i,y_i)$ **interpolation points**.
@@ -188,9 +188,7 @@ $$
 
 In other words, we try to solve the linear system
 
-:::{math}
-:label: eq-vandermonde-sys
-
+$$
 \underbrace{
 \begin{pmatrix}
 1 & x_0 & x_0^2 & \cdots & x_0^n
@@ -221,8 +219,7 @@ y_1
 \\
 y_n
 \end{pmatrix}.
-
-:::
+$$ (eq-vandermonde-sys)
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 

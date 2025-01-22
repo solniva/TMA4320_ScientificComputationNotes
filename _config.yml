@@ -51,14 +51,15 @@ html:
 sphinx:
   extra_extensions: 
     # Make sure to install corresponding python packages, e.g. via `pip install sphinx-proof`
-    - sphinx_proof
     - sphinx_togglebutton
-    - sphinx_exercise
     - sphinx_copybutton
+    - sphinx_proof
+    - sphinx_exercise
   config:
+    hide_solutions: False
     bibtex_reference_style: author_year
     myst_dmath_double_inline: true
-    sphinx:
+    # sphinx:
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
     latex_elements:
