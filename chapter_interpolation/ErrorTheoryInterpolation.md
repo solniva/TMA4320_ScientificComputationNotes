@@ -496,6 +496,12 @@ $$
 \tilde{x}_i = \cos \left( \frac{(2i+1)\pi}{2(n+1)} \right), \qquad i=0,\dotsc,n
 $$
 
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+![Chebyshev nodes](Chebyshev-nodes.png)
+
+Chebyshev nodes. Figure taken from {cite}`Holmes2023`, p.233. 
+
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Let $\omega_{Cheb}(x) = \prod_{j=1}^n(x-\tilde{x}_i)$. It is then possible to prove that
@@ -587,7 +593,7 @@ slideshow:
 ---
 # Insert your code here
 # Define number of interpolation points
-n = 9
+n = 17
 # 
 a, b = -1, 1                    # The interval
 x = np.linspace(a, b, 501)
@@ -595,6 +601,7 @@ x = np.linspace(a, b, 501)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -665,6 +672,7 @@ p = lagrange(ydata, l)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
