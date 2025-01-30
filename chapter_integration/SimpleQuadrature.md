@@ -245,7 +245,7 @@ x_2 = b$ and corresponding weights $w_0 = w_2 = \tfrac{b-a}{6}$ and $w_1 = \tfra
 
 In this note we will see how quadrature rules can be constructed from
 integration of interpolation polynomials.  We will demonstrate how to
-do error analysis and how to find error estimates. 
+do error analysis and how to find error estimates.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 

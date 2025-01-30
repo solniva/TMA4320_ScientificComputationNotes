@@ -76,7 +76,7 @@ Matlab of SciPy.  The steps are:
 
 +++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
-5. Find an expression for the error $E[f](a,b) = I[f](a,b)-Q[f](a,b)$. 
+5. Find an expression for the error $E[f](a,b) = I[f](a,b)-Q[f](a,b)$.
 
 +++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
@@ -344,6 +344,24 @@ slideshow:
   slide_type: ''
 ---
 # Insert your code here
+
+def f(x):
+    return np.cos(np.pi/2*x)
+
+a, b = 0, 1
+m = 2
+int_f = 2/np.pi
+
+qr_f = CT(f, a, b, m)
+print(f"Exact value {int_f}")
+print(f"Numerical integration for m = {m} gives {qr_f}")
+print(f"Difference  = {int_f - qr_f}")
+
+for m in [4, 8, 16, 32, 64]:
+    qr_f = CT(f, a, b, m)
+    print(f"Exact value {int_f}")
+    print(f"Numerical integration for m = {m} gives {qr_f}")
+    print(f"Difference  = {int_f - qr_f}")
 ```
 
 +++ {"editable": true, "slideshow": {"slide_type": ""}}
