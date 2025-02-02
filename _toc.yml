@@ -13,4 +13,5 @@ chapters:
   - file: chapter_integration/CompositeQuadrature
   # - file: chapter_integration/AdaptiveQuadrature
   # - file: chapter_integration/GaussQuadrature
+- file: chapter_ode/ExamplesODE
 - file: references
