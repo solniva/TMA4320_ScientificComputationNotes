@@ -51,6 +51,8 @@ for which the inital value $y(t_0)=y_0$ is given, and we only are
 interested in the solution for $x>t_0$. In these lecture notes, only
 initial value problems are considered.
 
+
+
 +++ {"slideshow": {"slide_type": "slide"}}
 
 :::{prf:example} Population growth and decay processes
@@ -71,7 +73,7 @@ Negative $\lambda < 0$
 typically appear in decaying processes, e.g., the decay of a radioactive
 isotopes, where $\lambda$ is then simply called the *decay constant*.
 
-The analytical solution to {ref}`ode:eq:exponential` is
+The analytical solution to {ref}`ode:eq:exponential` 
 
 $$
 y(t) = y_0 e^{\lambda(t-t_0)}
@@ -82,7 +84,7 @@ the accuracy of the numerical methods to be introduced.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}} 
 
 :::{prf:example}  Time-dependent coefficients
 :label: ode:exa:time-dep-coef
@@ -164,6 +166,7 @@ y_{1,0}
 \right).
 $$
 
+
 +++ {"slideshow": {"slide_type": "slide"}}
 
 :::{prf:example} Lotka-Volterra equation
@@ -181,6 +184,8 @@ z'(t) &= \delta y(t)z(t) - \gamma z(t)
 where $x$ denotes time, $y(t)$ describes the population of preys and
 $z(t)$ the population of predators.  The parameters $\alpha, \beta,
 \delta$ and $\gamma$ depends on the populations to be modeled.
+
+:::
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -217,18 +222,12 @@ S' = - \beta S I
 \end{equation}
 $$
 
-<!-- Equation labels as ordinary links -->
-<div id="ode:eq:sir_model_i"></div>
-
 $$
 \begin{equation}  
 I' = \beta S I - \gamma I
 \label{ode:eq:sir_model_i} \tag{4}
 \end{equation}
 $$
-
-<!-- Equation labels as ordinary links -->
-<div id="ode:eq:sir_model_r"></div>
 
 $$
 \begin{equation}  
@@ -265,6 +264,8 @@ $$
 
 where $\mu>0$ is some constant.  As initial values $u_0=2$ and
 $u'_0=0$ are common choices.
+
+:::
 
 Later in this module we will see how such equations can be rewritten as a
 system of first order ODEs.  Systems of higher order ODEs can be treated similarly.
