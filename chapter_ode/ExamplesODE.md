@@ -40,7 +40,7 @@ $$
 
 where $y'(t)=\frac{dy}{dx}$.
 The *inital condition* $y(t_0)=y_0$ is required for a unique
-solution. 
+solution.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -50,8 +50,6 @@ It is common to use the term *initial value problem (IVP)* for an ODE
 for which the inital value $y(t_0)=y_0$ is given, and we only are
 interested in the solution for $x>t_0$. In these lecture notes, only
 initial value problems are considered.
-
-
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -84,7 +82,7 @@ the accuracy of the numerical methods to be introduced.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}} 
++++ {"slideshow": {"slide_type": "slide"}}
 
 :::{prf:example}  Time-dependent coefficients
 :label: ode:exa:time-dep-coef
@@ -166,7 +164,6 @@ y_{1,0}
 \right).
 $$
 
-
 +++ {"slideshow": {"slide_type": "slide"}}
 
 :::{prf:example} Lotka-Volterra equation
@@ -215,26 +212,13 @@ A short derivation can be found in [[LingeLangtangen2016]](#LingeLangtangen2016)
 
 The final ODE system is given by
 
-$$
-\begin{equation}
-S' = - \beta S I
-\label{ode:eq:sir_model_s} \tag{3}
-\end{equation}
-$$
-
-$$
-\begin{equation}  
-I' = \beta S I - \gamma I
-\label{ode:eq:sir_model_i} \tag{4}
-\end{equation}
-$$
-
-$$
-\begin{equation}  
-R' = \gamma I,
-\label{ode:eq:sir_model_r} \tag{5}
-\end{equation}
-$$
+\begin{align}
+S' &= - \beta S I
+\\
+I' &= \beta S I - \gamma I
+\\
+R' &= \gamma I,
+\end{align}
 
 where $\beta$ denotes the infection rate, and $\gamma$ the removal rate.
 
