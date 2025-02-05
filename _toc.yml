@@ -14,4 +14,8 @@ chapters:
   # - file: chapter_integration/AdaptiveQuadrature
   # - file: chapter_integration/GaussQuadrature
 - file: chapter_ode/ExamplesODE
+  sections:
+  - file: chapter_ode/IntroductionNuMeODE
+  - file: chapter_ode/ErrorAnalysisNuMeODE
+  - file: chapter_ode/RungeKuttaNuMeODE
 - file: references

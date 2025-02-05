@@ -56,6 +56,7 @@ sphinx:
     - sphinx_proof
     - sphinx_exercise
   config:
+    # hide_solutions: True
     hide_solutions: False
     bibtex_reference_style: author_year
     myst_dmath_double_inline: true
