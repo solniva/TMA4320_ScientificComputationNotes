@@ -9,7 +9,7 @@ matplotlib
 matplotlib-venn
 numpy
 pandas
-plotly
+# plotly
 scipy
 sympy
 tqdm
