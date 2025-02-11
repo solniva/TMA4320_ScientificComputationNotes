@@ -53,7 +53,7 @@ size $\tau_k$, and the solution $y_k$ at the *current* point $t_k$,
 without needing information from earlier points $t_{k-1}, t_{k-2},
 \ldots$. This motivates the following definition.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:definition} One step methods
 :label: ode:def:one-step-meth
@@ -88,7 +88,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 The OSM is called **explicit** if the increment function $\Phi$
 does not depend on ${\boldsymbol y}_{k+1}$, otherwise it is called **implicit**.
@@ -430,27 +430,28 @@ print(table)
 
 ### A general convergence result for one step methods
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:theorem} Convergence of one-step methods
 :label: ode:thm:osm-convergence-theory
 :::
 
+
 Assume that there exist positive constants $M$ and $D$ such that the
 increment function satisfies
 
 $$
-\| \mathbf{\Phi}(t,\mathbf{y};\tau) - \mathbf{\Phi}(t,\mathbf{z};\tau) \| \leq M \| \mathbf{y}-\mathbf{z} \|
+\| {\boldsymbol \Phi}(t,\mathbf{y};\tau) - {\boldsymbol \Phi}(t,\mathbf{z};\tau) \| \leq M \| \mathbf{y}-\mathbf{z} \|
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 and
 the local trunctation error satisfies
 
 $$
 \| {\boldsymbol \eta}(t, \tau) \| =
-\| \mathbf{y}(t+\tau) - \left (\mathbf{y}(t) + \tau \mathbf{\Phi}(t, \mathbf{y}(t),
+\| \mathbf{y}(t+\tau) - \left (\mathbf{y}(t) + \tau {\boldsymbol \Phi}(t, \mathbf{y}(t),
 \tau)\right) \|
 \leqslant D \tau^{p+1}
 $$
@@ -458,7 +459,7 @@ $$
 for all $t$, $\mathbf{y}$ and $\mathbf{z}$ in the neighbourhood of the
 solution.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 In that case, the global error satisfies
 
