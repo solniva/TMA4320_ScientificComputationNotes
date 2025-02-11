@@ -110,7 +110,7 @@ final time $T$ resulting in the following
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:algorithm} Euler's method
-:label: ode:euler-meth
+:label: ode:alg:euler-meth
 
 **Input** Given a function $f(t,y)$, initial value $(t_0,y_0)$ and maximal  number of time steps $N$.
 
@@ -474,6 +474,7 @@ This leads to the following recipe.
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:algorithm} Algorithm Heun's method
+:label: ode:alg:heun-meth
 
 Given a function $f(t,y)$ and an initial value $(t_0,y_0)$.
 * Set $t = t_0$.
@@ -637,10 +638,13 @@ $$
 \quad y_{2,0} = 0.5.
 $$
 
-User Euler's method to solve the equation over the interval $[0,20]$,
-and use $\tau=0.02$.
-Try also other step sizes, e.g. $\tau=0.1$ and $\tau=0.002$. 
+Use Euler's method to solve the equation over the interval $[0,20]$,
+and use $\tau=0.02$. Try also other step sizes, e.g. $\tau=0.1$ and $\tau=0.002$. What do you observe?
 
+Now use Heun's method with $\tau=0.1$ Also try smaller step sizes.
+
+Compare Heun's and Euler's method. How small do you chose the time step in Euler's method to visually match the solution
+from Heun's method?
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -671,9 +675,16 @@ def lotka_volterra(t, y):
 
 t0, T = 0, 20            # Integration interval
 y0 = np.array([2, 0.5])  # Initital values
+```
 
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 # Solve the equation
-tau = 0.1  
+tau = 1e-4
 Nmax = int(20/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)
@@ -683,7 +694,7 @@ plt.figure()
 plt.plot(ts, ys_eul)
 
 # Solve the equation
-tau = 0.1 
+tau = 0.1
 Nmax = int(20/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_heun = heun(y0, t0, T, lotka_volterra, Nmax)
@@ -772,7 +783,7 @@ y_2' &= \mu(1-y_1^2)y_2 - y_1, & y_2(0) &= u_0'.
 
 **a)**
 Let  $\mu=2$, $u(0)=2$ and $u'(0)=0$ and solve the equation over the interval
-$[0,20]$, using the explicit Euler and $\tau=0.1$. Play with different
+$[0,20]$, using the explicit Euler and $\tau=0.05$. Play with different
 step sizes, and maybe also with different values of $\mu$.
 
 **b)**
@@ -817,16 +828,16 @@ t0, T - 0, 20
 y0 = np.array([2,0])
 
 # Solve the equation using Euler and plot
-tau = 0.02
+tau = 0.05
 Nmax = int(20/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_eul  = explicit_euler(y0, t0, T, f, Nmax)
 
 plt.figure()
-plt.plot(ts,ys_eul);
+plt.plot(ts,ys_eul, "--");
 
 # Solve the equation using Heun
-tau = 0.02
+tau = 0.05
 Nmax = int(20/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_heun = heun(y0, t0, T, f, Nmax)
@@ -837,5 +848,89 @@ plt.title('Van der Pols ligning')
 plt.legend(['y1 - Euler','y2 - Euler', 'y1 - Heun','y2 - Heun'],loc='upper right');
 ```
 
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
 :::{solution-end}
 :::
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+:::{prf:observation} Euler vs. Heun
+
+We clearly see that Heun's method requires far fewer time steps compared to Euler's method to obtain the same (visual) solution. For instance, in the case of the Lotka-Volterra example we need with $\tau \approx 10^{-4}$ roughly 1000x more time steps for Euler than for Heuler's method, which produced visually the same solution for $\tau = 0.1$ 
+
+Looking back at algorithmic realization of {prf:ref}`Euler's method<ode:alg:euler-meth>` and {prf:ref}`Heun's method<ode:alg:heun-meth>` we can compare the estimated cost for **a single time step**. Assuming that the evalution
+of the rhs $f$ dominants the overall runtime cost, we observe that Euler's method requires one function evaluation
+while Heun's method's requires two function evaluation. That means that a single time step in Heun's method cost roughly twice as much as Euler's method. With the total number of time steps required by each method,
+we expect that Heun's method will result a speed up factor of roughly 500.
+:::
+
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
+Let's check whether we obtain the estimated speed factor by measuring the executation time of each solution method.
+
+To do so you can use ```%timeit``` and ```%%timeit``` magic functions in IPython/Jupyterlab,
+see [corresponding documentation](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit).
+
+In a nutshell, ```%%timeit``` measures the executation time of an entire cell, while ```%timeit```
+only measures only the executation time of a single line, e.g. as in
+
+```ipython
+%timeit my_function()
+```
+
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
+__Regarding the usage of ```timeit```:__
+To obtain reliable timeings, ```timeit``` does not perform a single run, but
+rather a number of runs <R>, and in each run, the given statement is executed 
+<N> times in a loop. This can sometimes lead to large waiting time, so you can change that by 
+time
+```python
+%timeit -r <R> -n <N> my_function()
+```
+Also if you want to store the value of the best run by passing the option ```-o```:
+
+```python
+timings_data = %timeit -o my_function()
+```
+    
+which stores the data from the timing experiment. You can access the best time measured
+in seconds by
+```python
+timings_data.best
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+t0, T = 0, 20            # Integration interval
+y0 = np.array([2, 0.5])  # Initital values
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+%%timeit
+tau = 1e-4
+Nmax = int(20/tau)
+ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: ''
+---
+%%timeit
+tau = 0.1
+Nmax = int(20/tau)
+ts, ys_heun = heun(y0, t0, T, lotka_volterra, Nmax)
+```
