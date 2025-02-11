@@ -12,11 +12,9 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-# Numerical solution of ordinary differential equations: Whetting your appetite
-
-+++ {"slideshow": {"slide_type": "slide"}}
+# Numerical solution of ordinary differential equations
 
 The topic of this note is the numerical solution of systems of
 ordinary differential equations (ODEs).  This has been discussed in
@@ -25,11 +23,11 @@ previous courses, see for instance the web page
 from Mathematics 1, as well as in Part 1 of this course, where the
 Laplace transform was introduced as a tool to solve ODEs analytically.
 
-Before we present the first numerical methods to solve ODEs, we quickly
-look at a number of examples which hopefully will will serve as test examples
+Before we present the first numerical methods to solve ODEs, we want to whet your appetite by quickly
+looking at a number of examples which hopefully will will serve as test examples
 throughout this topic.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Scalar first order ODEs
 A scalar, first-order ODE is an equation on the form
@@ -42,7 +40,7 @@ where $y'(t)=\frac{dy}{dx}$.
 The *inital condition* $y(t_0)=y_0$ is required for a unique
 solution.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Notice.**
 
@@ -51,7 +49,7 @@ for which the inital value $y(t_0)=y_0$ is given, and we only are
 interested in the solution for $x>t_0$. In these lecture notes, only
 initial value problems are considered.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Population growth and decay processes
 :label: exa-pop-growth-ode
@@ -82,7 +80,7 @@ the accuracy of the numerical methods to be introduced.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example}  Time-dependent coefficients
 :label: ode:exa:time-dep-coef
@@ -110,7 +108,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Systems of ODEs
 A system of $m$ ODEs are given by
@@ -122,7 +120,7 @@ y_2' &= f_2(t,y_1,y_2,\dotsc,y_m), & y_2(t_0) &= y_{2,0} \\
 y_m' &= f_m(t,y_1,y_2,\dotsc,y_m), & y_m(t_0) &= y_{m,0} \\ 
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Or more compactly by
 
@@ -164,7 +162,7 @@ y_{1,0}
 \right).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Lotka-Volterra equation
 :label: ode:exa:lotka-volterra
@@ -184,7 +182,7 @@ $z(t)$ the population of predators.  The parameters $\alpha, \beta,
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Spreading of diseases
 :label: ode:exa:spreading-disease
@@ -195,7 +193,7 @@ which goes under the name [SIR model](https://en.wikipedia.org/wiki/Compartmenta
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The SIR models divides the population into three
 population classes, namely
@@ -206,9 +204,9 @@ population classes, namely
 
 The model is of the spreading of a disease is based
 on moving individual from $S$ to $I$ and then to $R$.
-A short derivation can be found in [[LingeLangtangen2016]](#LingeLangtangen2016) (Ch. 4.2).
+A short derivation can be found in  {cite}`Ch. 4.2 of <LangtangenLinge2016>`.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The final ODE system is given by
 
@@ -222,7 +220,7 @@ R' &= \gamma I,
 
 where $\beta$ denotes the infection rate, and $\gamma$ the removal rate.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Higher order ODEs
 An initial value  ODE of order $m$ is given by
@@ -234,7 +232,7 @@ $$
 
 Here $u^{(1)} =u'$ and $u^{(m+1)}=\frac{du^{(m)}}{dx}$, for $m>0$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Van der Pol's equation
 :label: ode:exa:van-der-pol

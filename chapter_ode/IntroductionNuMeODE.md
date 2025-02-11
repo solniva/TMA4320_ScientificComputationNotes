@@ -12,12 +12,17 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ## Numerical solution of ordinary differential equations: Euler's and Heun's method
 As always we start by running some necessary boilerplate code.
 
 ```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
@@ -30,7 +35,7 @@ newparams = {'figure.figsize': (6.0, 6.0),
 plt.rcParams.update(newparams)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Euler's method
 Now we turn to our first numerical method,
@@ -41,7 +46,7 @@ We quickly review two alternative derivations,
 namely one based on *numerical differentiation*
 and one on *numerical integration*.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Derivation of Euler's method.**
 
@@ -57,7 +62,7 @@ and some final time $T$,
 we want to compute to an approximation of $y(t)$
 on $[t_0, T]$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 We start from $t_0$ and choose some (usually small) time step size
 $\tau_0$ and set the new time $t_1 = t_0 + \tau_0$. The goal is to
@@ -70,7 +75,7 @@ $$
 y(t_0+\tau) = y(t_0) + \tau y'(t_0) + \frac{1}{2}\tau^2 y''(t_0) + \dotsm.
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Assume the step size $\tau$ to be small, such that the solution is
 dominated by the first two terms.
@@ -88,7 +93,7 @@ $$
 y_1 = y_0 + \tau_0 f(t_0,y_0).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Now we can repeat this procedure and choose the next
 (possibly different) time
@@ -102,7 +107,7 @@ $$
 The idea is to repeat this procedure until we reached the
 final time $T$ resulting in the following
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:algorithm} Euler's method
 :label: ode:euler-meth
@@ -124,7 +129,7 @@ final time $T$ resulting in the following
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 So we can think of the Euler method as a method
 which approximates the continuous but unknown solution
@@ -141,7 +146,18 @@ Later we will also learn, how to choose the
 *time step adaptively*, depending on the
 solution's behavior.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
+
+Also, in order to compute an approximation
+at the next point $t_{k+1}$,
+Euler's method only needs to know $f$, $\tau_k$
+and the solution $y_k$ at the *current* point $t_k$,
+but not at earlier points $t_{k-1}, t_{k-2}, \ldots$
+Thus Euler's method
+is an prototype of a so-called **One Step Method (OSM)**.
+We will formalize this concept later.
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Numerical solution between the nodes.**
 
@@ -154,18 +170,7 @@ This is compatible with the way the numerical solution can
 be plotted, namely by connected each pair
 $(t_k, y_k)$ and $(t_{k+1}, y_{k+1})$ with straight lines.
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-Also, in order to compute an approximation
-at the next point $t_{k+1}$,
-Euler's method only needs to know $f$, $\tau_k$
-and the solution $y_k$ at the *current* point $t_k$,
-but not at earlier points $t_{k-1}, t_{k-2}, \ldots$
-Thus Euler's method
-is an prototype of a so-called **One Step Method (OSM)**.
-We will formalize this concept later.
-
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Interpretation: Euler's method via forward difference operators.**
 
@@ -183,7 +188,7 @@ $$
 Thus *Euler's method replace the differential quotient
 by a difference quotient.*
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Alternative derivation via numerical integration.**
 Recall that for a function $f: [a,b] \to \mathbb{R}$, we can
@@ -195,7 +200,7 @@ left endpoint quadrature rule from {prf:ref}`exa-known-qr-rules`,
 \int_a^b f(t) {\,\mathrm{d}t} \approx (b-a) f(a).
 \end{equation}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Turning to our IVP, we now formally integrate
 the ODE $y'(t) = f(t, y(t))$ on the time
@@ -213,7 +218,7 @@ y(t_{k+1}) - y(t_k)
 \underbrace{(t_{k+1}-t_{k})}_{\tau_k}f(t_k, y(t_k))
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Sorting terms gives us back Euler's method
 
@@ -222,13 +227,14 @@ y(t_{k+1}) \approx
 y(t_k) + \tau_k f(t_k, y(t_k)).
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Implementation of Euler's method
 Euler's method can be implemented in only a few lines of code:
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -243,12 +249,13 @@ def explicit_euler(y0, t0, T, f, Nmax):
     return (np.array(ts), np.array(ys))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Let's test Euler's method with the simple IVP given in {prf:ref}`exa-pop-growth-ode`.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -271,6 +278,7 @@ ys_ex = y_ex(ts)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -281,13 +289,13 @@ plt.plot(ts, ys_eul, 'ro-')
 plt.legend(["$y_{ex}$", "y" ])
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Plot the solution for various $N_t$,
 say $N_t = 4, 8, 16, 32$ against the exact solution given in 
 {prf:ref}`exa-pop-growth-ode`.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Error study for the Euler's method
 :label: ode:exe:euler-error-study
@@ -312,14 +320,14 @@ How does the error reduces if you double the number of points?
 Complete the following code outline by filling in the missing
 code indicated by `...`.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ```{code-block} python
 def error_study(y0, t0, T, f, Nmax_list, solver, y_ex):
     """
     Performs an error study for a given ODE solver by computing the maximum error 
     between the numerical solution and the exact solution for different values of Nmax.
-    Returns list of error reduction rates computed from two consecutively solves.
+    Print the list of error reduction rates computed from two consecutively solves.
 
     Parameters:
       y0 : Initial condition.
@@ -331,7 +339,7 @@ def error_study(y0, t0, T, f, Nmax_list, solver, y_ex):
       y_ex (function): Exact solution function.
 
     Returns:
-      numpy.ndarray: Array of error reduction rates computed from two consecutive solves.
+      None
     """
     max_errs = []
     for Nmax in Nmax_list:
@@ -342,24 +350,35 @@ def error_study(y0, t0, T, f, Nmax_list, solver, y_ex):
         # Compute max error for given solution and print it
         max_errs.append(...)
         print(f"For Nmax = {Nmax:3}, max ||y(t_i) - y_i||= {max_errs[-1]:.3e}")
+    # Turn list into array to allow for vectorized division
     max_errs = np.array(max_errs)
-    return ...
+    rates = ...
+    print("The computed error reduction rates are")
+    print(rates)
 
-# Define list for N_max
+
+# Define list for N_max and run error study
 Nmax_list = [4, 8, 16, 32, 64, 128]
-# Run error study
-rates = error_study(y0, t0, T, f, Nmax_list, explicit_euler, y_ex)
-print("The computed error reduction rates are")
-print(rates)
+error_study(y0, t0, T, f, Nmax_list, explicit_euler, y_ex)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+# Insert code here
+```
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{solution-start} ode:exe:euler-error-study 
 :::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -372,23 +391,25 @@ def error_study(y0, t0, T, f, Nmax_list, solver, y_ex):
         max_errs.append(np.abs(errors).max())
         print(f"For Nmax = {Nmax:3}, max ||y(t_i) - y_i||= {max_errs[-1]:.3e}")
     max_errs = np.array(max_errs)
-    return max_errs[:-1]/max_errs[1:]
+    rates = max_errs[:-1]/max_errs[1:]
+    print("The computed error reduction rates are")
+    print(rates)
 
 Nmax_list = [4, 8, 16, 32, 64, 128]
-rates = error_study(y0, t0, T, f, Nmax_list, explicit_euler, y_ex)
-print("The computed error reduction rates are")
-print(rates)
+error_study(y0, t0, T, f, Nmax_list, explicit_euler, y_ex)
 ```
+
++++ {"editable": true, "slideshow": {"slide_type": ""}}
 
 :::{solution-end}
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Heun's method
 Before we start looking at more exciting examples, we will derive a one-step method that is more accurate than Euler's method. Note that Euler's method can be interpreted as being based on a quadrature rule with a degree of exactness equal to 0. Let's try to use a better quadrature rule!
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Again, we start from the *exact representation*, but this time we use the trapezoidal rule, which has a degree of exactness equal to $1$, yielding
 
@@ -405,7 +426,7 @@ f(t_{k}, y(t_{k})
 \right)
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 This suggest to consider the scheme
 
@@ -420,16 +441,16 @@ f(t_{k}, y_{k})
 \right)
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 But note that starting from $y_k$, we cannot immediately compute $y_{k+1}$
 as it appears also in the expression $f(t_{k+1}, y_{k+1})$!
-This is an example of an **implicit method**!
+This is an example of an **implicit method**. We will discuss those later in detail.
 
 To turn this scheme into an **explicit** scheme, the idea is now to
 approximate $y_{k+1}$ appearing in $f$ with an explicit Euler step:
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 \begin{align*}
@@ -450,7 +471,7 @@ arranged by computing the nested expression in stages, first
 the inner one and then the outer one.
 This leads to the following recipe.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:algorithm} Algorithm Heun's method
 
@@ -477,6 +498,7 @@ The function `heun` can be implemented as follows:
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -493,36 +515,33 @@ def heun(y0, t0, T, f, Nmax):
     return (np.array(ts), np.array(ys))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Comparing Heun with Euler
 :label: exe:heun_vs_euler
-:::
 
-**a)**
-Redo the {prf:ref}:`ode:exa:exponential` with Heun, and plot
+Solve {prf:ref}`exa-pop-growth-ode` with Heun, and plot
 both the exact solution, $y_{eul}$ and $y_{heun}$
 for $N_t = 4, 8, 16, 32$.
-
-**b)**
-Redo {ref}`ode:exe:euler-error-study` with Heun.
-
 :::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-**Solution.**
+:::{solution-start} exe:heun_vs_euler
+:::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -550,25 +569,39 @@ plt.plot(ts, ys_heun, 'b+-')
 plt.legend(["$y_{ex}$", "$y$ Euler", "$y$ Heun" ])
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
+
+:::{solution-end}
+:::
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 <!-- --- end solution of exercise --- -->
 
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
+
+:::{exercise} Error rates for Heun's method 
+:label: exe:heun_rates
+Redo {ref}`ode:exe:euler-error-study` with Heun.
+:::
+
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
-<!-- --- begin solution of exercise --- -->
-**Solution.**
+:::{solution-start} exe:heun_rates
+:::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -576,11 +609,16 @@ Nmax_list = [4, 8, 16, 32, 64, 128]
 error_study(y0, t0, T, f, Nmax_list, heun, y_ex)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
+
+:::{solution-end}
+:::
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Applying Heun's and Euler's method
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} The Lotka-Volterra equation revisited
 :label: ode:exa-lotka-volterra-revisit
@@ -605,7 +643,7 @@ Try also other step sizes, e.g. $\tau=0.1$ and $\tau=0.002$.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{note}
 In this case, the exact solution is not known.  What is known is
@@ -615,6 +653,7 @@ Check for different values of $\tau$.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -655,7 +694,7 @@ plt.legend(['$y_0(t)$ - Euler', '$y_1(t)$ - Euler', '$y_0(t)$ - Heun', '$y_1(t)$
         loc="upper right" )
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Solving the Lotka-Volterra system using Heun's method
 :label: exe:lotka_volterra_with_heun
@@ -665,7 +704,7 @@ generated by Euler's and Heun's method.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Higher order ODEs
 How can we numerically solve higher order ODEs
@@ -685,7 +724,7 @@ $$
 
 are known.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Such equations can be written as a system of first order ODEs by the
 following trick:
@@ -709,7 +748,7 @@ such that
 which is nothing but a system of first order ODEs, and can be solved numerically
 exactly as before.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise-start} Numerical solution of Van der Pol's equation
 :label: exe:van-der-pol-numerics
@@ -729,7 +768,7 @@ y_1' &= y_2, & y_1(0) &= u_0,  \\
 y_2' &= \mu(1-y_1^2)y_2 - y_1, & y_2(0) &= u_0'.
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **a)**
 Let  $\mu=2$, $u(0)=2$ and $u'(0)=0$ and solve the equation over the interval
@@ -748,19 +787,21 @@ in the "eyeball norm".)
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{solution-start} exe:van-der-pol-numerics
 :::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
