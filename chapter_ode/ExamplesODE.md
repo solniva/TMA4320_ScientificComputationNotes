@@ -23,13 +23,14 @@ previous courses, see for instance the web page
 from Mathematics 1, as well as in Part 1 of this course, where the
 Laplace transform was introduced as a tool to solve ODEs analytically.
 
-Before we present the first numerical methods to solve ODEs, we want to whet your appetite by quickly
-looking at a number of examples which hopefully will will serve as test examples
+Before we present the first numerical methods to solve ODEs, we want to look at a number of examples which hopefully will will serve as test examples
 throughout this topic.
+
+## Whetting your appetite 
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Scalar first order ODEs
+### Scalar first order ODEs
 A scalar, first-order ODE is an equation on the form
 
 $$
@@ -110,7 +111,7 @@ $$
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Systems of ODEs
+### Systems of ODEs
 A system of $m$ ODEs are given by
 
 \begin{align*}
@@ -222,7 +223,7 @@ where $\beta$ denotes the infection rate, and $\gamma$ the removal rate.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-## Higher order ODEs
+### Higher order ODEs
 An initial value  ODE of order $m$ is given by
 
 $$
@@ -246,6 +247,8 @@ $$
 
 where $\mu>0$ is some constant.  As initial values $u_0=2$ and
 $u'_0=0$ are common choices.
+
+
 
 :::
 
