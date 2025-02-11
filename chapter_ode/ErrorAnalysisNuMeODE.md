@@ -426,7 +426,7 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### A general convergence result for one step methods
 
@@ -434,7 +434,6 @@ print(table)
 
 :::{prf:theorem} Convergence of one-step methods
 :label: ode:thm:osm-convergence-theory
-:::
 
 
 Assume that there exist positive constants $M$ and $D$ such that the
@@ -443,8 +442,6 @@ increment function satisfies
 $$
 \| {\boldsymbol \Phi}(t,\mathbf{y};\tau) - {\boldsymbol \Phi}(t,\mathbf{z};\tau) \| \leq M \| \mathbf{y}-\mathbf{z} \|
 $$
-
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 and
 the local trunctation error satisfies
@@ -459,8 +456,6 @@ $$
 for all $t$, $\mathbf{y}$ and $\mathbf{z}$ in the neighbourhood of the
 solution.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
-
 In that case, the global error satisfies
 
 $$
@@ -470,8 +465,9 @@ $$
 \frac{e^{M(T-t_0)}-1}{M}D,
 $$
 where $\tau = \max_{k \in \{0,1,\ldots,N_t\}} \tau_k$.
+:::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:proof}
 We omit the proof here.
