@@ -18,4 +18,5 @@ chapters:
   - file: chapter_ode/IntroductionNuMeODE
   - file: chapter_ode/ErrorAnalysisNuMeODE
   - file: chapter_ode/RungeKuttaNuMeODE
+  - file: chapter_ode/AdaptiveNuMeODE
 - file: references
