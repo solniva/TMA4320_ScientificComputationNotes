@@ -1,8 +1,8 @@
-ipympl
-ipython
+# ipympl
+# ipython
 ipywidgets
-jupyter
-jupyterlab-git
+# jupyter
+# jupyterlab-git
 jupyterlab-myst
 jupyterlab-rise
 matplotlib
@@ -13,6 +13,8 @@ pandas
 scipy
 sympy
 tqdm
-webgui-jupyter-widgets
+# webgui-jupyter-widgets
 jupyter-book
+sphinx-proof
+sphinx-exercise
 jupytext
