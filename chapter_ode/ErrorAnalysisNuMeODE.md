@@ -193,6 +193,26 @@ with $\tau = \max_k \tau_k$.
 
 :::
 
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+<!-- :::{figure} ./LadyWindermereFan.png
+---
+height: 500px
+name: LadyWinderemerFan
+---
+
+Lady Windermere’s fan, named after a comedy play by Oscar Wilde. The
+figure describes the transport and the accumulation of the local truncation errors
+$\eta(t_n,\tau_n) =: d_{n+1}$  into the global error $e_N = y(t_N)-y_N$ at the end point $ t_N = t_{\mathrm{end}}$.
+
+::: -->
+
+![LadyWinderemerFan](./LadyWindermereFan.png)
+
+**Figure.** Lady Windermere’s fan, named after a comedy play by Oscar Wilde. The
+figure describes the transport and the accumulation of the local truncation errors
+$\eta(t_n,\tau_n) =: d_{n+1}$  into the global error $e_N = y(t_N)-y_N$ at the end point $ t_N = t_{\mathrm{end}}$.
+
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Discussion.**
