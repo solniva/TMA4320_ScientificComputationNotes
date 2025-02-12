@@ -26,6 +26,8 @@ Laplace transform was introduced as a tool to solve ODEs analytically.
 Before we present the first numerical methods to solve ODEs, we want to look at a number of examples which hopefully will will serve as test examples
 throughout this topic.
 
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
+
 ## Whetting your appetite
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -47,7 +49,7 @@ solution.
 
 It is common to use the term *initial value problem (IVP)* for an ODE
 for which the inital value $y(t_0)=y_0$ is given, and we only are
-interested in the solution for $x>t_0$. In these lecture notes, only
+interested in the solution for $t>t_0$. In these lecture notes, only
 initial value problems are considered.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -68,9 +70,9 @@ some population, e.g., cells, humans, animals, with unlimited resources
 
 Negative $\lambda < 0$
 typically appear in decaying processes, e.g., the decay of a radioactive
-isotopes, where $\lambda$ is then simply called the *decay constant*.
+isotopes, where $\lambda$ is then simply called the *decay rate*.
 
-The analytical solution to {ref}`ode:eq:exponential` 
+The analytical solution to {ref}`ode:eq:exponential` is
 
 $$
 y(t) = y_0 e^{\lambda(t-t_0)}
@@ -121,9 +123,9 @@ y_2' &= f_2(t,y_1,y_2,\dotsc,y_m), & y_2(t_0) &= y_{2,0} \\
 y_m' &= f_m(t,y_1,y_2,\dotsc,y_m), & y_m(t_0) &= y_{m,0} \\ 
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
-Or more compactly by
+and can be written more compactly as
 
 $$
 \mathbf{y}'(t) = \mathbf{f}(t, \mathbf{y}(t)),  \qquad \mathbf{y}(t_0) = \mathbf{y}_0
@@ -188,7 +190,7 @@ $z(t)$ the population of predators.  The parameters $\alpha, \beta,
 :::{prf:example} Spreading of diseases
 :label: ode:exa:spreading-disease
 
-Motivated by the ongoing corona virus pandemic, we consider
+Motivated by the recent corona virus pandemic, we consider
 a (simple!) model for the spreading of an infectious disease,
 which goes under the name [SIR model](https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model).
 
@@ -207,7 +209,7 @@ The model is of the spreading of a disease is based
 on moving individual from $S$ to $I$ and then to $R$.
 A short derivation can be found in  {cite}`Ch. 4.2 of <LangtangenLinge2016>`.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 The final ODE system is given by
 
@@ -250,7 +252,7 @@ where $\mu>0$ is some constant.  As initial values $u_0=2$ and
 $u'_0=0$ are common choices.
 
 Van der Pol's equation describes a non-conservative oscillator with
-non-linear damping.  and can be used (possibly with modifications) to
+non-linear damping and can be used (possibly with modifications) to
 model electrical circuits, heartbeats, and other biological systems
 exhibiting oscillatory behavior.
 
