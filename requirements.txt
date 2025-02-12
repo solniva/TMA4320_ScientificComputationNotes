@@ -1,4 +1,4 @@
-# ipympl
+ipympl
 # ipython
 ipywidgets
 # jupyter
