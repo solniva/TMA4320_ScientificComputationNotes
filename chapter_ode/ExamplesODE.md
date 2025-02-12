@@ -26,7 +26,7 @@ Laplace transform was introduced as a tool to solve ODEs analytically.
 Before we present the first numerical methods to solve ODEs, we want to look at a number of examples which hopefully will will serve as test examples
 throughout this topic.
 
-## Whetting your appetite 
+## Whetting your appetite
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
@@ -241,6 +241,7 @@ Here $u^{(1)} =u'$ and $u^{(m+1)}=\frac{du^{(m)}}{dx}$, for $m>0$.
 [Van der Pol's equation](https://en.wikipedia.org/wiki/Van_der_Pol_oscillator)
 is a second order differential equation, given by
 
+
 $$
 u^{(2)} = \mu (1-u^2)u' - u, \qquad u(0)=u_0, \quad u'(0)=u'_0,
 $$
@@ -248,6 +249,10 @@ $$
 where $\mu>0$ is some constant.  As initial values $u_0=2$ and
 $u'_0=0$ are common choices.
 
+Van der Pol's equation describes a non-conservative oscillator with
+non-linear damping.  and can be used (possibly with modifications) to
+model electrical circuits, heartbeats, and other biological systems
+exhibiting oscillatory behavior.
 
 
 :::
