@@ -500,7 +500,7 @@ $$
 
 ![Chebyshev nodes](Chebyshev-nodes.png)
 
-Chebyshev nodes. Figure taken from {cite}`Holmes2023`, p.233. 
+Chebyshev nodes. Figure taken from {cite}`Holmes2023`, p.233.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
