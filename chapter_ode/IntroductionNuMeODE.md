@@ -315,7 +315,7 @@ How does the error reduces if you double the number of points?
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Complete the following code outline by filling in the missing
 code indicated by `...`.
@@ -684,7 +684,7 @@ slideshow:
   slide_type: slide
 ---
 # Solve the equation
-tau = 1e-4
+tau = 0.02
 Nmax = int(20/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)
@@ -865,7 +865,7 @@ while Heun's method's requires two function evaluation. That means that a single
 we expect that Heun's method will result a speed up factor of roughly 500.
 :::
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Let's check whether we obtain the estimated speed factor by measuring the executation time of each solution method.
 
@@ -879,7 +879,7 @@ only measures only the executation time of a single line, e.g. as in
 %timeit my_function()
 ```
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 __Regarding the usage of ```timeit```:__
 To obtain reliable timeings, ```timeit``` does not perform a single run, but
@@ -905,7 +905,7 @@ timings_data.best
 ---
 editable: true
 slideshow:
-  slide_type: ''
+  slide_type: slide
 ---
 t0, T = 0, 20            # Integration interval
 y0 = np.array([2, 0.5])  # Initital values
@@ -915,7 +915,7 @@ y0 = np.array([2, 0.5])  # Initital values
 ---
 editable: true
 slideshow:
-  slide_type: ''
+  slide_type: fragment
 ---
 %%timeit
 tau = 1e-4
@@ -927,7 +927,7 @@ ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)
 ---
 editable: true
 slideshow:
-  slide_type: ''
+  slide_type: fragment
 ---
 %%timeit
 tau = 0.1
