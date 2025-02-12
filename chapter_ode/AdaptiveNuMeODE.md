@@ -75,8 +75,8 @@ reached a point $(t_n,\mathbf{y}_n)$. One step forward with each of these method
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 \begin{align*}
-  \mathbf{y}_{n+1} &= \mathbf{y}_n + \tau \mathbf{\Phi}(t_n, \mathbf{y}_n; \tau), && \text{order $p$}, \\ 
-  \widehat{\mathbf{y}}_{n+1} &= \mathbf{y}_n + \tau \widehat{\mathbf{\Phi}}(t_n, \mathbf{y}_n; \tau), && \text{order $\widehat{p} = p+1$ or more}. \\ 
+  \mathbf{y}_{n+1} &= \mathbf{y}_n + \tau {\boldsymbol \Phi}(t_n, \mathbf{y}_n; \tau), && \text{order $p$}, \\ 
+  \widehat{\mathbf{y}}_{n+1} &= \mathbf{y}_n + \tau \widehat{{\boldsymbol \Phi}}(t_n, \mathbf{y}_n; \tau), && \text{order $\widehat{p} = p+1$ or more}. \\ 
 \end{align*}
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
@@ -97,8 +97,8 @@ As we have already seen, the local error is determined by finding the power seri
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 \begin{align*}
-\mathbf{y}(t_{n+1};t_n,\mathbf{y}_n) - \mathbf{y}_{n+1} &= \mathbf{\Psi}(t_n,y_n)\tau^{p+1}  +\dotsc, \\ 
-\mathbf{y}(t_{n+1};t_n,\mathbf{y}_n) - \widehat{\mathbf{y}}_{n+1} &= \widehat{\mathbf{\Psi}}(t_n,y_n)\tau^{p+2} + \dotsc,
+\mathbf{y}(t_{n+1};t_n,\mathbf{y}_n) - \mathbf{y}_{n+1} &= {\boldsymbol\Psi}(t_n,y_n)\tau^{p+1}  +\dotsc, \\ 
+\mathbf{y}(t_{n+1};t_n,\mathbf{y}_n) - \widehat{\mathbf{y}}_{n+1} &= \widehat{{\boldsymbol\Psi}}(t_n,y_n)\tau^{p+2} + \dotsc,
 \end{align*}
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
@@ -110,12 +110,12 @@ Taking the difference gives
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
-\widehat{\mathbf{y}}_{n+1} - \mathbf{y}_{n+1} = \mathbf{\Psi}(t_n,\mathbf{y}_n)\tau^{p+1} + \ldots.
+\widehat{\mathbf{y}}_{n+1} - \mathbf{y}_{n+1} = {\boldsymbol\Psi}(t_n,\mathbf{y}_n)\tau^{p+1} + \ldots.
 $$
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-Assume now that $\tau$ is small, such that the *principal error term* $\mathbf{\Psi(t_n,y_n)}\tau^{p+1}$ dominates the error series. Then a reasonable approximation to the unknown local error $\mathbf{l}_{n+1}$ is the *local error estimate* $\mathbf{le}_{n+1}$:
+Assume now that $\tau$ is small, such that the *principal error term* ${\boldsymbol\Psi(t_n,y_n)}\tau^{p+1}$ dominates the error series. Then a reasonable approximation to the unknown local error $\mathbf{l}_{n+1}$ is the *local error estimate* $\mathbf{le}_{n+1}$:
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
