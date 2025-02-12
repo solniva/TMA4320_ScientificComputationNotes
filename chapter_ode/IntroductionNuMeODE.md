@@ -263,7 +263,7 @@ slideshow:
 t0, T = 0, 1
 y0 = 1
 lam = 1
-Nmax = 5
+Nmax = 100
 
 # rhs of IVP
 f = lambda t,y: lam*y
@@ -285,8 +285,8 @@ slideshow:
 ---
 # Plot it
 plt.figure()
-plt.plot(ts, ys_ex, 'bo-')
-plt.plot(ts, ys_eul, 'ro--')
+plt.plot(ts, ys_ex, 'b-')
+plt.plot(ts, ys_eul, 'r--')
 plt.legend(["$y_{ex}$", "$y_{eul}$" ])
 ```
 
@@ -370,6 +370,25 @@ slideshow:
   slide_type: slide
 ---
 # Insert code here
+def error_study(y0, t0, T, f, Nmax_list, solver, y_ex):
+    max_errs = []
+    for Nmax in Nmax_list:
+        # Compute list of timestep ts and computed solution ys
+        ts, ys = solver(y0, t0, T, f, Nmax)
+        # Evaluate y_ex in ts
+        ys_ex = y_ex(ts)
+        # Compute max error for given solution and print it
+        max_errs.append(np.abs(ys_ex - ys).max())
+        print(f"For Nmax = {Nmax:3}, max ||y(t_i) - y_i||= {max_errs[-1]:.3e}")
+    # Turn list into array to allow for vectorized division
+    max_errs = np.array(max_errs)
+    rates = max_errs[:-1]/max_errs[1:]
+    print("The computed error reduction rates are")
+    print(rates)
+
+# Define list for N_max and run error study
+Nmax_list = [4, 8, 16, 32, 64, 128]
+error_study(y0, t0, T, f, Nmax_list, explicit_euler, y_ex)
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -550,7 +569,7 @@ slideshow:
 t0, T = 0, 1
 y0 = 1
 lam = 1
-Nmax = 4
+Nmax = 8
 
 # rhs of IVP
 f = lambda t,y: lam*y
@@ -690,7 +709,7 @@ slideshow:
   slide_type: slide
 ---
 # Solve the equation
-tau = 0.02
+tau = 0.0002
 Nmax = int((T-t0)/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)

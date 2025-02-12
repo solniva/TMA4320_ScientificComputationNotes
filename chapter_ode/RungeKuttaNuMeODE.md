@@ -154,6 +154,79 @@ in `ErrorAnalysisNuMeODE` notes.
 
 :::
 
++++
+
+:::{solution} ode:exe-improved-ex-euler
+:class: dropdown
+
+**a)** 
+
+$$
+\Phi(t_k,
+y_{k},
+\tau_{k})
+=
+f\left(t_{k} + \frac{\tau}{2}, y_k + \frac{\tau}{2}f(t_k,y_k)\right).
+$$
+
+**b)**
+Using the increment function above, the Lipschitz condition for $f$, the triangle inequality and then the Lipschitz condition for $f$ again we get the following: 
+\begin{align*}
+|\Phi(t,y)-\Phi(t,z)| &= |f\left(t + \frac{\tau}{2}, y + \frac{\tau}{2}f(t,y)\right) - f\left(t + \frac{\tau}{2}, z + \frac{\tau}{2}f(t,z)\right)| 
+\\ 
+&\leq M| y + \frac{\tau}{2}f(t,y) - z - \frac{\tau}{2}f(t,z) |
+\\ 
+&\leq M| y - z  | + M\frac{\tau}{2} | f(t,y) - f(t,z) |
+\\ 
+&\leq M| y - z  | + M^2\frac{\tau}{2} | y-z |
+\\ 
+& = (M+\frac{\tau}{2}M^2)|y-z|.
+\end{align*}
+
+
+Assuming that the step size $\tau$ is bounded upward by some $\tau_0$,
+we can conclude that
+
+$$
+|\Phi(t,y)-\Phi(t,z)| \leq L_{\Phi}|y-z|, \qquad L_{\Phi}=M+\frac{\tau_0}{2}M^2.
+$$
+
+**c)**
+As before, we have the following for the exact solution: 
+$$
+y(t_0+\tau) = y_0 + \tau f + \frac{\tau^2}{2}(f_t + f_y f) +
+\frac{\tau^3}{6}(f_{tt}+2f_{ty}f+f_{yy}ff + f_yf_xf + f_yf_t+ (f_y)^2f
+) + \dotsm,
+$$
+
+where $f$ and all its derivatives are evaluated in $(t_0,y_0)$.
+
+For the numerical solution we get
+
+
+\begin{align*}
+  k_1 &= f(t_0,y_0) = f, 
+  \\ 
+  k_2 &= f(t_0+\frac{\tau}{2}, y_0+\frac{\tau}{2} k_1) 
+  \\ 
+      & = f + \frac{\tau}{2} f_t + f_y\frac{\tau}{2} k_1 + \frac{1}{8}f_{tt}\tau^2 + f_{ty}\frac{\tau^2}{4} k_1 + \frac{1}{8}f_{yy}\tau^2 k_1^2 
+       + \dotsm 
+       \\ 
+      &= f + \frac{\tau}{2}(f_t + f_yf) + \frac{\tau^2}{8}(f_{tt} + 2f_{ty}f + f_{yy}f^2) + \dotsm
+      \\ 
+  y_1 &=  \tau k_2
+\end{align*}
+
+
+and the local truncation error will be
+
+$$
+\eta(t_0, \tau) = y(t_0+\tau)-y_1 = \frac{\tau^3}{24}(-f_{tt}-2f_{ty}f-f_{yy}f^2 + 4f_yf_t + 4(f_y)^2f) + \dotsm
+$$
+
+
+:::
+
 +++ {"slideshow": {"slide_type": "slide"}}
 
 Recall that the **explicit Euler method** is defined by

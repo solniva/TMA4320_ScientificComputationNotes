@@ -19,4 +19,5 @@ chapters:
   - file: chapter_ode/ErrorAnalysisNuMeODE
   - file: chapter_ode/RungeKuttaNuMeODE
   - file: chapter_ode/AdaptiveNuMeODE
+  - file: homework/SIR_exercise
 - file: references
