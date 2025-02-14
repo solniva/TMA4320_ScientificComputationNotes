@@ -355,7 +355,7 @@ def explicit_euler(y0, t0, T, f, Nmax):
     return (np.array(ts), np.array(ys))
 ```
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 and copy and complete the following code snippet to compute the EOC for the explicit Euler method:
 
@@ -706,7 +706,7 @@ By repeated use of the condition above and the triangle inequalitiy for absolute
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 \begin{align*}
-|\Phi(t,y)-\Phi(t,z)| &= \frac{1}{2}|f(t,y)+f(t+\tau,y+f(t,y))-f(t,z)-\tau f(t+\tau,z+f(t,z)| 
+|\Phi(t,y)-\Phi(t,z)| &= \frac{1}{2}|f(t,y)+f(t+\tau,y+f(t,y))-f(t,z)- f(t+\tau,z+f(t,z)| 
 \\ 
 &\leq \frac{1}{2}\big(|f(t,y)-f(t,z)|+|f(t+\tau,y+\tau f(t,y))-f(t+\tau,z+\tau f(t,z)| \big) 
 \\ 
