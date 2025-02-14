@@ -625,7 +625,7 @@ above, the series for the exact solution becomes
 
 $$
 y(t_0+\tau) = y_0 + \tau f + \frac{\tau^2}{2}(f_t + f_y f) +
-\frac{\tau^3}{6}(f_{tt}+2f_{ty}f+f_{yy}ff + f_yf_xf + f_yf_t+ (f_y)^2f
+\frac{\tau^3}{6}(f_{tt}+2f_{ty}f+f_{yy}f^2 + f_yf_t+ (f_y)^2f
 ) + \dotsm,
 $$
 
