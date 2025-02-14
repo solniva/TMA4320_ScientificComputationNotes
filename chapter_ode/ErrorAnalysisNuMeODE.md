@@ -178,15 +178,15 @@ $
 the **global truncation error** is defined by
 
 $$
-e_k(t_k, \tau_k) = y(t_k) - y_k
-\quad \text{for } k=0,\ldots,N.
+e_k(t_{k-1}, \tau_{k-1}) = y(t_{k}) - y_{k}
+\quad \text{for } k=1,\ldots,N.
 $$(:label: ode:eq:global_err)
 
 A one step method is called **convergent with order $p\in\mathbb{N}$** if
 
 $$
-\max_{k \in \{0,1,\ldots,N_t\}}
-|e_k(t_k,\tau_k)|
+\max_{k \in \{1,\ldots,N\}}
+|e_k(t_{k-1},\tau_{k-1})|
 = \mathcal{O}(\tau^p)
 $$(ode:eq:global_err_conv)
 
@@ -525,8 +525,8 @@ solution.
 In that case, the global error satisfies
 
 $$
-\max_{k \in \{0,1,\ldots,N_t\}}
-\|e_k(t_k,\tau_k) \|
+\max_{k \in \{1,\ldots,N\}}
+\|e_k(t_{k-1},\tau_{k-1}) \|
 \leqslant C \tau^p, \qquad C =
 \frac{e^{M(T-t_0)}-1}{M}D,
 $$

@@ -263,7 +263,7 @@ slideshow:
 t0, T = 0, 1
 y0 = 1
 lam = 1
-Nmax = 100
+Nmax = 4
 
 # rhs of IVP
 f = lambda t,y: lam*y
@@ -285,8 +285,8 @@ slideshow:
 ---
 # Plot it
 plt.figure()
-plt.plot(ts, ys_ex, 'b-')
-plt.plot(ts, ys_eul, 'r--')
+plt.plot(ts, ys_ex, 'b-o')
+plt.plot(ts, ys_eul, 'r--o')
 plt.legend(["$y_{ex}$", "$y_{eul}$" ])
 ```
 
@@ -709,7 +709,7 @@ slideshow:
   slide_type: slide
 ---
 # Solve the equation
-tau = 0.0002
+tau = 0.02
 Nmax = int((T-t0)/tau)
 print("Nmax = {:4}".format(Nmax))
 ts, ys_eul = explicit_euler(y0, t0, T, lotka_volterra, Nmax)
