@@ -16,7 +16,7 @@ kernelspec:
 
 ## Numerical solution of ordinary differential equations: Error analysis of one step methods
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 As always, we start by importing the necessary modules:
 
@@ -25,6 +25,7 @@ As always, we start by importing the necessary modules:
 editable: true
 slideshow:
   slide_type: slide
+tags: [thebe-init, hide-input]
 ---
 import numpy as np
 from numpy import pi
@@ -35,15 +36,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from IPython.display import display
 
-# Use a funny plotting style
-plt.xkcd()
+# If you want to use a funny plotting style, uncomment the following line 
+# plt.xkcd()
 newparams = {'figure.figsize': (6.0, 6.0), 'axes.grid': True,
              'lines.markersize': 8, 'lines.linewidth': 2,
              'font.size': 14}
 plt.rcParams.update(newparams)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### One Step Methods
 
@@ -93,7 +94,7 @@ $$
 The OSM is called **explicit** if the increment function $\Phi$
 does not depend on ${\boldsymbol y}_{k+1}$, otherwise it is called **implicit**.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Increment functions for Euler and Heun
 :label: ode:exa:increment_function_euler_heun
@@ -125,11 +126,11 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Local and global truncation error of OSM
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:definition} Local truncation error
 :label: ode:def:consist_err
@@ -156,13 +157,13 @@ $
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Consistency order of Euler's method
 Euler's method has consistency order $p=1$.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:definition} Global truncation error
 :label: ode:def:global_err
@@ -296,7 +297,7 @@ This is implemented in the following `compute_eoc` function.
 ---
 editable: true
 slideshow:
-  slide_type: slide
+  slide_type: fragment
 ---
 def compute_eoc(y0, t0, T, f, Nmax_list, solver, y_ex):
     errs = [ ]
@@ -318,7 +319,15 @@ def compute_eoc(y0, t0, T, f, Nmax_list, solver, y_ex):
     return errs, eocs
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+Here, `solver` is any ODE solver wrapped into a Python function which can be called like this
+
+```python
+ts, ys = solver(y0, t0, T, f, Nmax)
+```
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise}
 :label: ode:exe:euler-conv-order
@@ -326,11 +335,12 @@ Use the `compute_eoc` function and
 any of the examples with a known analytical solution from the previous lecture
 to determine convergence order for Euler's.
 
-Start from importing the Eulers's method from the previous lecture.
+Start from importing the Eulers's method from the previous lecture,
 :::
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -345,20 +355,55 @@ def explicit_euler(y0, t0, T, f, Nmax):
     return (np.array(ts), np.array(ys))
 ```
 
++++ {"editable": true, "slideshow": {"slide_type": ""}}
+
+and copy and complete the following code snippet to compute the EOC for the explicit Euler method:
+
+```{code-block} python
+# Data for the ODE
+# Start/stop time
+t0, T = ...
+# Initial value
+y0 = ...
+# growth/decay rate
+lam = ...
+
+# rhs of IVP
+f = lambda t,y: ...
+
+# Exact solution to compare against 
+# Use numpy version of exo, namely np.exp 
+y_ex = lambda t: ...
+
+# List of Nmax for which you want to run the study
+Nmax_list = [... ]
+
+# Run convergence test for the solver
+errs, eocs = compute_eoc(...)
+print(eocs)
+
+# Plot rates in a table
+table = pd.DataFrame({'Error': errs, 'EOC' : eocs})
+display(table)
+print(table)
+```
+
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Solution.**
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -382,7 +427,7 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise}
 :label: ode:exe:heun-conv-order
@@ -393,6 +438,7 @@ Start from importing the Heun's method from yesterday's lecture.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
@@ -411,34 +457,25 @@ def heun(y0, t0, T, f, Nmax):
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Solution.**
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: fragment
 ---
-t0, T = 0, 1
-y0 = 1
-lam = 1
-
-# rhs of IVP
-f = lambda t,y: lam*y
-
-# Exact solution to compare against
-y_ex = lambda t: y0*np.exp(lam*(t-t0))
-
-Nmax_list = [4, 8, 16, 32, 64, 128, 256, 512]
-
-errs, eocs = compute_eoc(y0, t0, T, f, Nmax_list, heun, y_ex)
+solver = heun
+errs, eocs = compute_eoc(y0, t0, T, f, Nmax_list, solver, y_ex)
 print(eocs)
 
 table = pd.DataFrame({'Error': errs, 'EOC' : eocs})
@@ -449,6 +486,15 @@ print(table)
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### A general convergence result for one step methods
+
+
+:::{note}
+
+In the following discussion, we consider only **explicit** methods where the increment function
+${\boldsymbol \Phi}$ 
+**does not** depend on ${\boldsymbol y}_{k+1}$.
+
+:::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
@@ -490,18 +536,18 @@ where $\tau = \max_{k \in \{0,1,\ldots,N_t\}} \tau_k$.
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:proof}
-We omit the proof here.
+We omit the proof here
 :::
 
 :::{admonition} TODO
-:class: dropdown, danger
-Add proof.
+:class: dropdown danger
+Add proof and discuss it in class if time permits.
 :::
 
 It can be proved that the first of these conditions are satisfied for
 all the methods that will be considered here.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Summary.**
 
@@ -511,7 +557,7 @@ The convergence theorem for one step methods can be summarized as
 $\Rightarrow$
 "global truncation error behaves like $\mathcal{O}(\tau^{p})$"
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 or equivalently,
 
@@ -585,7 +631,7 @@ $$
 
 where $f$ and all its derivatives are evaluated in $(t_0,y_0)$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 For the numerical solution we get
 
@@ -618,7 +664,7 @@ $$
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The first nonzero term in the local truncation error series is called
-*the principal error term*. For $\tau $ sufficiently small this is the
+**the principal error term**. For $\tau $ sufficiently small this is the
 term dominating the error, and this fact will be used later.
 
 Although the series has been developed around the initial point,
@@ -632,7 +678,7 @@ $$
 
 *Consequently, Heun's method is of consistency order $2$.*
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Lipschitz condition for $\Phi$.**
 Further, we have to prove the condition on the increment function
@@ -653,11 +699,11 @@ $$
 \Phi(t,y) = \frac{1}{2}(f(t,y)+f(t+\tau,y+\tau f(t,y))). \\
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 By repeated use of the condition above and the triangle inequalitiy for absolute values we get
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 \begin{align*}
 |\Phi(t,y)-\Phi(t,z)| &= \frac{1}{2}|f(t,y)+f(t+\tau,y+f(t,y))-f(t,z)-\tau f(t+\tau,z+f(t,z)| 
@@ -671,7 +717,7 @@ By repeated use of the condition above and the triangle inequalitiy for absolute
 & = (L+\frac{\tau}{2}L^2)|y-z|.
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Assuming that the step size $\tau$ is bounded upward by some $\tau_0$,
 we can conclude that
@@ -683,7 +729,7 @@ $$
 Thanks to {prf:ref}`ode:thm:osm-convergence-theory`, we can conclude
 that Heun's method is convergent of order 2.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 In the next part, when we introduce a large class of 
 one step methods known as Runge-Kutta methods, of which
