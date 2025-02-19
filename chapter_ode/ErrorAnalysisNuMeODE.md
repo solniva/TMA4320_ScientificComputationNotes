@@ -12,11 +12,11 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ## Numerical solution of ordinary differential equations: Error analysis of one step methods
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 As always, we start by importing the necessary modules:
 
@@ -44,7 +44,7 @@ newparams = {'figure.figsize': (6.0, 6.0), 'axes.grid': True,
 plt.rcParams.update(newparams)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### One Step Methods
 
@@ -54,7 +54,7 @@ size $\tau_k$, and the solution $y_k$ at the *current* point $t_k$,
 without needing information from earlier points $t_{k-1}, t_{k-2},
 \ldots$. This motivates the following definition.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:definition} One step methods
 :label: ode:def:one-step-meth
@@ -89,12 +89,12 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 The OSM is called **explicit** if the increment function $\Phi$
 does not depend on ${\boldsymbol y}_{k+1}$, otherwise it is called **implicit**.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:example} Increment functions for Euler and Heun
 :label: ode:exa:increment_function_euler_heun
@@ -126,11 +126,11 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Local and global truncation error of OSM
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:definition} Local truncation error
 :label: ode:def:consist_err
@@ -157,13 +157,13 @@ $
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:example} Consistency order of Euler's method
 Euler's method has consistency order $p=1$.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:definition} Global truncation error
 :label: ode:def:global_err
@@ -214,7 +214,7 @@ $\eta(t_n,\tau_n) =: d_{n+1}$  into the global error $e_N = y(t_N)-y_N$ at the e
 figure describes the transport and the accumulation of the local truncation errors
 $\eta(t_n,\tau_n) =: d_{n+1}$  into the global error $e_N = y(t_N)-y_N$ at the end point $ t_N = t_{\mathrm{end}}$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Discussion.**
 
@@ -227,7 +227,7 @@ $$
 e(\tau) = O(\tau^p) \leqslant C \tau^p.
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 This implies that if we change the time step size
 from $\tau$ to e.g. $\tfrac{\tau}{2}$,
@@ -236,12 +236,12 @@ error decreases from $C \tau^p$
 to $C (\tfrac{\tau}{2})^p$, that is, the error
 will be reduced by a factor $2^{-p}$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 How can we determine the convergence rate by means of numerical
 experiments?
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 Starting from
 $
@@ -256,7 +256,7 @@ $$
 Thus $\log(e(\tau))$ is a linear function of $\log(\tau)$ and the slope
 of this linear function corresponds to the order of convergence $p$.
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 So if you have an *exact solution* at your disposal, you can for an
 increasing sequence `Nmax_list` defining a descreasing sequence of
@@ -266,7 +266,7 @@ and solve your problem numerically and then compute the resulting exact error
 $e(\tau_i)$ and plot it against $\tau_i$ in a $\log-\log$ plot to determine
 the convergence order.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 In addition you can also compute the
 experimentally observed convergence rate
@@ -289,7 +289,7 @@ $$
 
 Ideally, $\mathrm{EOC}(i)$ is close to $p$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 This is implemented in the following `compute_eoc` function.
 
@@ -327,7 +327,7 @@ Here, `solver` is any ODE solver wrapped into a Python function which can be cal
 ts, ys = solver(y0, t0, T, f, Nmax)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise}
 :label: ode:exe:euler-conv-order
@@ -397,7 +397,7 @@ slideshow:
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Solution.**
 
@@ -427,7 +427,7 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{exercise}
 :label: ode:exe:heun-conv-order
@@ -464,7 +464,7 @@ slideshow:
 # Insert code here.
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Solution.**
 
@@ -483,7 +483,7 @@ display(table)
 print(table)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### A general convergence result for one step methods
 
@@ -496,7 +496,7 @@ ${\boldsymbol \Phi}$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:theorem} Convergence of one-step methods
 :label: ode:thm:osm-convergence-theory
@@ -533,7 +533,7 @@ $$
 where $\tau = \max_{k \in \{0,1,\ldots,N_t\}} \tau_k$.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{prf:proof}
 We omit the proof here
@@ -547,7 +547,7 @@ Add proof and discuss it in class if time permits.
 It can be proved that the first of these conditions are satisfied for
 all the methods that will be considered here.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Summary.**
 
@@ -557,7 +557,7 @@ The convergence theorem for one step methods can be summarized as
 $\Rightarrow$
 "global truncation error behaves like $\mathcal{O}(\tau^{p})$"
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 or equivalently,
 
@@ -565,7 +565,7 @@ or equivalently,
 $\Rightarrow$
 "convergence order $p$".
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ### Convergence properties of Heun's method
 Thanks to {prf:ref}`ode:thm:osm-convergence-theory`, we need to show
@@ -576,7 +576,7 @@ of a given one step methods:
   in the step size $\tau$
 * the condition $\| {\boldsymbol \Phi}(t,{\boldsymbol y}, \tau) - {\boldsymbol \Phi}(t,{\boldsymbol z},\tau) \| \leqslant  M \| {\boldsymbol y} - {\boldsymbol z} \|$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Determining the consistency order.**
 The local truncation error is found by making Taylor expansions of the
@@ -597,7 +597,7 @@ Further, we will surpress the arguments of the function $f$ and its
 derivatives. So $f$ is to be understood as $f(t,y(t))$ although it is
 not explicitly written.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 The Taylor expansion of the exact solution $y(t+\tau)$ is given by
 
@@ -605,7 +605,7 @@ $$
 y(t+\tau)=y(t)+\tau y'(t) + \frac{\tau^2}{2}y''(t) + \frac{\tau^3}{6}y'''(t) + \dotsm.
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Higher derivatives of $y(t)$ can be expressed in terms of the function
 $f$ by using the chain rule and the product rule for differentiation.
@@ -617,7 +617,7 @@ $f$ by using the chain rule and the product rule for differentiation.
              = f_{tt}+2f_{ty}f+f_{yy}f^2 +f_yf_t+ (f_y)^2f.
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 Find the series of the exact and the numerical solution around
 $x_0,y_0$ (any other point will do equally well). From the discussion
@@ -631,11 +631,11 @@ $$
 
 where $f$ and all its derivatives are evaluated in $(t_0,y_0)$.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 For the numerical solution we get
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 \begin{align*}
   k_1 &= f(t_0,y_0) = f, 
@@ -653,7 +653,7 @@ For the numerical solution we get
       &= y_0 + \tau f + \frac{\tau^2}{2}(f_t+f_yf)+ \frac{\tau^3}{4}(f_{tt} + 2f_{ty}f + f_{yy}f^2)  + \dotsm
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 and the local truncation error will be
 
@@ -661,7 +661,7 @@ $$
 \eta(t_0, \tau) = y(t_0+\tau)-y_1 = \frac{\tau^3}{12}(-f_{tt}-2f_{ty}f-f_{yy}f^2 + 2f_yf_t + 2(f_y)^2f) + \dotsm
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 The first nonzero term in the local truncation error series is called
 **the principal error term**. For $\tau $ sufficiently small this is the
@@ -678,7 +678,7 @@ $$
 
 *Consequently, Heun's method is of consistency order $2$.*
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 **Lipschitz condition for $\Phi$.**
 Further, we have to prove the condition on the increment function
@@ -691,7 +691,7 @@ $$
 |f(t,y)-f(t,z)| \leq L |y-z|.
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 The increment function for Heun's method is given by
 
@@ -699,11 +699,11 @@ $$
 \Phi(t,y) = \frac{1}{2}(f(t,y)+f(t+\tau,y+\tau f(t,y))). \\
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 By repeated use of the condition above and the triangle inequalitiy for absolute values we get
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "fragment"}}
 
 \begin{align*}
 |\Phi(t,y)-\Phi(t,z)| &= \frac{1}{2}|f(t,y)+f(t+\tau,y+f(t,y))-f(t,z)- f(t+\tau,z+f(t,z)| 
@@ -717,7 +717,7 @@ By repeated use of the condition above and the triangle inequalitiy for absolute
 & = (L+\frac{\tau}{2}L^2)|y-z|.
 \end{align*}
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 Assuming that the step size $\tau$ is bounded upward by some $\tau_0$,
 we can conclude that
@@ -729,7 +729,7 @@ $$
 Thanks to {prf:ref}`ode:thm:osm-convergence-theory`, we can conclude
 that Heun's method is convergent of order 2.
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 In the next part, when we introduce a large class of 
 one step methods known as Runge-Kutta methods, of which

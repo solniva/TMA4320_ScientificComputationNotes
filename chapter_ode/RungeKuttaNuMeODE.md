@@ -12,11 +12,9 @@ kernelspec:
   name: python3
 ---
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}}
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ## Numerical solution of ordinary differential equations: Higher order Runge-Kutta methods
-
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 As always, we start by importing some important Python modules.
 
@@ -25,6 +23,7 @@ As always, we start by importing some important Python modules.
 editable: true
 slideshow:
   slide_type: fragment
+tags: [thebe-init, hide-input]
 ---
 import numpy as np
 from numpy import pi
@@ -56,11 +55,11 @@ But before we start, we will derive yet another one-step method,
 known as *explicit midpoint rule* or
 *improved explicit Euler method*.
 
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
+
 As for Heun's method, we start from the IVP $y' = f(t, y)$,
 integrate over $[t_k, t_{k+1}]$ and
 apply the midpoint rule:
-
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 $$
 y(t_{k+1}) - y(t_k)
@@ -79,51 +78,45 @@ Since we cannot determine the value $y(t_k + \tfrac{1}{2}\tau_k)$ from this syst
 we borrow an idea from derivation of Heun's method and approximate
 it using a half explicit Euler step
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
-
 $$
 y(t_k + \tfrac{1}{2}\tau_k) \approx
 y(t_k + \tfrac{1}{2}\tau_k f(t_k, y(t_k)),
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
-
-leading to the following one-step methods.
-
-Given $y_k, \tau_k$ and $f$, compute
-
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
+
+leading to the following one-step methods: Given $y_k, \tau_k$ and $f$, compute
 
 $$
 y_{k+1} := y_k + \tau_k f(t_k + \tfrac{1}{2}\tau_k, y_k + \tfrac{1}{2}\tau_k f(t_k, y_k)).
 $$(eq:improved_euler)
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The nested function expression can again be rewritten using 2 *stage
 derivatives*, which leads to the following form of the
 **explicit midpoint rule** or
 **improved explicit Euler method**:
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{1} := f(t_k, y_k)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{2} := f(t_k + \tfrac{\tau_k}{2}, y_k + \tfrac{\tau_k}{2} k_1)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y_{k+1} := y_k + \tau_k k_2
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Analyzing the improved explicit Euler method
 :label: ode:exe-improved-ex-euler
@@ -154,7 +147,7 @@ in `ErrorAnalysisNuMeODE` notes.
 
 :::
 
-+++
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 :::{solution} ode:exe-improved-ex-euler
 :class: dropdown
@@ -227,92 +220,64 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Recall that the **explicit Euler method** is defined by
 
-+++ {"slideshow": {"slide_type": "fragment"}}
+\begin{align}
+k_{1} &:= f(t_k, y_k)
+\\
+y_{k+1} &:= y_k + \tau_k  k_1
+\end{align}
 
-$$
-k_{1} := f(t_k, y_k)
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
-y_{k+1} := y_k + \tau_k  k_1
-$$
-
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 And **Heun's method** or **explicit trapezoidal rule** is similar to the improved explicit Euler method given by
 
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
-k_{1} := f(t_k, y_k)
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
-k_{2} := f(t_k + \tau_k, y_k + \tau_k k_1)
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
-y_{k+1} := y_k + \tau_k ( \tfrac{1}{2} k_1  + \tfrac{1}{2} k_2 ) 
-$$
-
-+++ {"slideshow": {"slide_type": "slide"}}
+\begin{align}
+k_{1} &:= f(t_k, y_k)
+\\
+k_{2} &:= f(t_k + \tau_k, y_k + \tau_k k_1)
+\\
+y_{k+1} &:= y_k + \tau_k ( \tfrac{1}{2} k_1  + \tfrac{1}{2} k_2 ) 
+\end{align}
 
 Note that for all schemes so far, we are able to successively compute the stage derivatives,
 starting from $k_1 = f(t_k, y_{k})$.
 
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
+
 This is not the case for the last one-step method we encountered so far,
 namely the **implicit trapezoidal rule** or **Crank-Nicolson method**:
-
-+++ {"slideshow": {"slide_type": "fragment"}}
 
 $$
 y_{k+1} := y_k + \tau_k (\tfrac{1}{2} \underbrace{f(t_k, y_k)}_{:=k_1} + \tfrac{1}{2}
 \underbrace{f(t_k+\tau_k, y_{k+1}))}_{:= k_2}
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Using stage derivatives, we obtain this time
 
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
+\begin{align}
 k_{1} := f(t_k, y_k)
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
+\\
 k_{2} := f(t_k + \tau_k, y_{k} + \tau (\tfrac{1}{2}k_1 + \tfrac{1}{2} k_2)) 
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-$$
+\\
 y_{k+1} := y_k + \tau_k ( \dfrac{1}{2} k_1  + \dfrac{1}{2} k_2 ) 
-$$
+\end{align}
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The previous examples and the wish for constructing higher ($> 2$) one-step methods
 leads to following definition
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:definition}
 :label: def:runge-kutta
 
-Given $b_j$, $c_j$, and $a_{jl}$ for $j,l = 1,\ldots s$, the Runge-Kutta method is
+Given $b_j$, $c_j$, and $a_{jl}$ for $j,l = 1,\ldots s$, a Runge-Kutta method is
 defined by the recipe
 
 \begin{align}
@@ -325,11 +290,9 @@ y_{k+1} &:= y_{k} + \tau_k \sum_{j=1}^s b_j k_j
 \end{align}
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Runge-Kutta schemes are often specified in the form of a **Butcher table**:
-
-+++ {"slideshow": {"slide_type": "fragment"}}
 
 $$
 \begin{array}{c|ccc}
@@ -344,30 +307,30 @@ c_s & a_{s1} & \cdots & a_{ss}
 \end{array}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 If $a_{ij} = 0$ for $j \geqslant i$ the Runge-Kutta method is called **explicit**
 as the stages $k_i$ are defined explicitly and can be computed successively:
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 $$
 k_1 := f(t_k + c_1 \tau_k, y_k)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_2 := f(t_k + c_2 \tau_k, y_k + \tau_k a_{21} k_1)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_3 := f(t_k + c_3 \tau_k, y_k + \tau_k a_{31} k_1 + \tau a_{32} k_2)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 \vdots 
@@ -382,19 +345,19 @@ $$
 \vdots 
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_s := f(t_k + c_s \tau_k, y_k + \tau_k \sum_{l=1}^{s-1} a_{sl} k_l)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y_{k+1} := y_{k} + \tau \sum_{j=1}^s b_j k_j
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} Butcher tables for some well-known Runge-Kutta methods
 :label: ode:exe-butcher-tables
@@ -447,7 +410,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{solution} ode:exe-butcher-tables
 
@@ -463,7 +426,7 @@ The correct pairing is
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 We show a verbose solution for explicit Euler, improved explicit Euler and Crank-Nicolson.
 
@@ -471,19 +434,19 @@ We show a verbose solution for explicit Euler, improved explicit Euler and Crank
 this is an example of a 1-stage Runge-Kutta method (s=1). Looking
 at the definition of the stage and the final step, we see that
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{1} := f(t_k, y_k) = f(t_k + \underbrace{0}_{c_1} \cdot \tau_k, y_k + \tau_k \underbrace{0}_{a_{11}} \cdot k_1) \Rightarrow c_1 = a_{11} = 0
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y_{k+1} := y_k + \tau_k k_1 =  y_k + \tau_k \underbrace{1}_{b_1}\cdot k_1 \Rightarrow  b_1 = 1
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Thus, the Butcher table is
 
@@ -498,37 +461,37 @@ $$
 \end{array}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Improved explicit Euler method**: Since we have to stage derivatives,
 this is an example of a 2-stage Runge-Kutta method (s=2). Looking
 at the definition of the stages and the final step, we see that
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{1} := f(t_k, y_k) = f(t_k + \underbrace{0}_{c_1} \cdot \tau_k, y_k + \tau_k \underbrace{0}_{a_{11}} \cdot k_1 + \tau_k \underbrace{0}_{a_{21}} \cdot k_2) \Rightarrow c_1 = a_{11} = a_{21} = 0
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{2} := f(t_k + \tfrac{\tau_k}{2}, y_k + \tfrac{\tau_k}{2} k_1)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
       \phantom{:}= f(t_k + \underbrace{\tfrac{1}{2}}_{c_2}\tau_k, y_k + \tau_k\underbrace{\tfrac{1}{2}}_{a_{21}} \cdot k_1 + \tau_k \underbrace{0}_{a_{22}} \cdot k_2) \Rightarrow c_2 = \tfrac{1}{2}, a_{21} = \tfrac{1}{2}, a_{22} = 0
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y_{k+1} := y_k + \tau_k k_2 =  y_k + \tau_k \underbrace{0}_{b_1}\cdot k_1  \tau_k \underbrace{1}_{b_2} \cdot k_2 \Rightarrow  b_1 = 0, b_2 = 1
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Thus, the Butcher table is
 
@@ -545,39 +508,39 @@ $$
 \end{array}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 **Crank-Nicolson method**: Since we have to stage derivatives,
 this is an example of a 2-stage Runge-Kutta method (s=2). Looking
 at the definition of the stages and the final step, we see that
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{1} := f(t_k, y_k) = f(t_k + \underbrace{0}_{c_1} \cdot \tau_k, y_k + \tau_k \underbrace{0}_{a_{11}} \cdot k_1 + \tau_k \underbrace{0}_{a_{21}} \cdot k_2) \Rightarrow c_1 = a_{11} = a_{21} = 0
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 k_{2} := f(t_k + \tau_k, y_{k} + \tau_k \tfrac{1}{2}k_1 + \tau_k \tfrac{1}{2} k_2)
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 \phantom{:}= f(t_k + \underbrace{1}_{c_1}\cdot\tau_k, y_{k} + \tau_k \underbrace{\tfrac{1}{2}}_{a_{21}} k_1 + \tau_k \underbrace{\tfrac{1}{2}}_{a_{22}} k_2)
 \Rightarrow c_1 = 1, a_{21} = a_{22} = \tfrac{1}{2}
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y_{k+1} := y_k + \tau_k ( \dfrac{1}{2} k_1  + \dfrac{1}{2} k_2 )
  = y_k + \tau_k \underbrace{\dfrac{1}{2}}_{b_1} k_1  + \tau_k \underbrace{\dfrac{1}{2}}_{b_2} k_2
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Thus, the Butcher table is
 
@@ -589,11 +552,11 @@ $$
 \end{array}
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Implementation of explicit Runge-Kutta methods
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Below you will find the implementation a general
 solver class
@@ -622,21 +585,22 @@ and can be used like this
         # Define number of time steps
         n = 10
         
-        # Create solver
+        # Create solver using the Butcher table
         rk3 = ExplicitRungeKutta(a, b, c)
         
         # Solve problem (applies __call__ function)
         ts, ys = rk3(y0, t0, T, f, Nmax)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The complete implementation is given here:
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
-  slide_type: fragment
+  slide_type: slide
 ---
 class ExplicitRungeKutta:
     def __init__(self, a, b, c):
@@ -680,7 +644,7 @@ class ExplicitRungeKutta:
         return (np.array(ts), np.array(ys))
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{prf:example} Implementation and testing of the improved Euler method
 We implement the **improved explicit Euler** from above and plot the
@@ -690,6 +654,7 @@ order of convergence, we use again the `compute_eoc` function.
 
 ```{code-cell} ipython3
 ---
+editable: true
 slideshow:
   slide_type: slide
 ---
@@ -713,7 +678,7 @@ def compute_eoc(y0, t0, T, f, Nmax_list, solver, y_ex):
     return errs, eocs
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Here is the implementation of the full example.
 
@@ -771,19 +736,6 @@ display(table)
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-<!-- How does it compare to -->
-<!-- Next we compare it to the standard explicit Euler. -->
-
-**Warning.**
-
-For homework assignment 6 problem 1, you need to implement the given Runge-Kutta methods
-from scratch, so you are *not allowed* to simply use the `ExplicitRungeKutta` class
-with the corresponding Butcher table. You are of course allowed to use this class
-as an additional implementation variant and to e.g. compare numerical
-results you get with those you obtain using your own implementation.
-
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
-
 :::{exercise}: The classical 4-stage Runge-Kutta method
 
 While the term Runge-Kutta methods nowadays refer to the general
@@ -807,6 +759,15 @@ and determine the convergence order experimentally.
 
 :::
 
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+# Insert your code here
+```
+
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{note}
@@ -827,7 +788,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{note}
 
@@ -836,14 +797,22 @@ reduces to a simpe integration problem, and in this case
 the classical Runge-Kutta methods reduces to the classical Simpson's rule
 for numerical integration.
 
+More generally, when applied to simple integration problems, Runge-Kutta methods
+reduces to various quadrature rules over the interval 
+$ [t_i, t_{i+1}]$ with $s$ quadrature points, 
+where the integration points $\{\xi_j\}_{i=1}^s$ 
+and correspond weights $\{w_i\}_{i=1}^s$
+of the quadrature rules are given by respectively 
+$\xi_i = t_i + c_j\tau$, $w_i = b_i$ for $j=1,\ldots,s$
+
 See this [wiki page](https://en.wikipedia.org/wiki/List\_of\_Runge-Kutta\_methods)
 for a list of various Runge-Kutta methods.
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-### Supplemental: Runge-Kutta Methods via Numerical Integration
+### Runge-Kutta Methods via Numerical Integration
 This section provides a supplemental and more in-depth motivation of how to
 arrive at the general concept of Runge-Kutta methods via numerical integration,
 similar to the ideas we already presented when we derived Crank-Nicolson, Heun's method
@@ -853,31 +822,31 @@ For a given time interval $I_i = [t_i, t_{i+1}]$ we
 want to compute $y_{i+1}$ assuming that $y_i$ is given.
 Starting from the exact expression
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 $$
-y(t_{i+1}) - y(t_i) = \int_{t_i}^{t_{i+1}} f(t, y(t)){\,\mathrm{d}t},
+y(t_{i+1}) - y(t_i) =  \int_{t_i}^{t_{i+1}} y(t)'{\,\mathrm{d}t} = \int_{t_i}^{t_{i+1}} f(t, y(t)){\,\mathrm{d}t},
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 the idea is now to approximate the integral by some quadrature
 rule $\mathrm{Q}[\cdot](\{\xi_j\}_{j=1}^s,\{b_j\}_{j=1}^s)$ defined on $I_i$.
 Then we get
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 y(t_{i+1}) - y(t_i) = \int_{t_i}^{t_{i+1}} f(t, y(t)){\,\mathrm{d}t}
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 \approx \tau \sum_{j=0}^s b_j f(\xi_j, y(\xi_j))
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Now we can define $\{c_j\}_{j=1}^s$ such that  $\xi_j = t_{i} + c_j \tau$
 for $j=1,\ldots,s$
@@ -899,30 +868,30 @@ for $j=1,\ldots,s$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 In contrast to pure numerical integration, we don't know the values
 of $y(\xi_j)$. Again, we could use the same idea to approximate
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
-y(\xi_j) - y(t_i) = \int_{t_i}^{t_i+c_j \tau} f(t, y(t)){\,\mathrm{d}t}
+y(\xi_j) - y(t_i) =\int_{t_i}^{t_i+c_j \tau} y'(t){\,\mathrm{d}t} = \int_{t_i}^{t_i+c_j \tau} f(t, y(t)){\,\mathrm{d}t}
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 but then again we get a closure problem if we choose new quadrature points.
-The idea is now to *not introduce even more new quadrature points* but to
+The idea is now to **not introduce even more new quadrature points** but to
 use same $y(\xi_j)$ to avoid the closure problem.
 Note that this leads to an approximation of the integrals $\int_{t_i}^{t_i+c_j \tau}$
-with possible nodes *outside* of $[t_i, t_i + c_j \tau ]$.
+with possible nodes **outside** of $[t_i, t_i + c_j \tau ]$.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 This leads us to
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 $$
 y(\xi_j) - y(t_i) = \int_{t_i}^{t_i+c_j \tau} f(t, y(t)){\,\mathrm{d}t}
@@ -936,7 +905,7 @@ $$
 f(\xi_l, y(\xi_l))
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 $$
 =
@@ -945,11 +914,9 @@ $$
 f(\xi_l, y(\xi_l))
 $$
 
-+++ {"slideshow": {"slide_type": "fragment"}}
-
 where we set $ c_j  \tilde{a}_{jl} = a_{jl}$.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} A first condition on $a_{jl}$
 
@@ -974,7 +941,7 @@ of Runge-Kutta derivatives via *stages* $Y_j$ (and not stage derivatives $k_j$):
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-:::{prf:definition} Runge-Kutta methods
+:::{prf:definition} Runge-Kutta methods using stages $\{Y_j\}_{j=1}^s$
 :label: ode:def:runge-kutta-meth
 
 Given $b_j$, $c_j$, and $a_{jl}$ for $j,l = 1,\ldots s$, the Runge-Kutta method is
@@ -982,57 +949,46 @@ defined by the recipe
 
 \begin{align*}
 Y_{j}
-&= y_i +  \tau \sum_{l=1}^{s} {a}_{jl}
+&:= y_i +  \tau \sum_{l=1}^{s} {a}_{jl}
 f(t_i + c_l \tau, Y_l) \quad \text{for } j = 1,\ldots s,
 \\
-y_{i+1} &= y_i + \tau \sum_{j=1}^s b_j f(t_i + c_j \tau, Y_j)
+y_{i+1} &:= y_i + \tau \sum_{j=1}^s b_j f(t_i + c_j \tau, Y_j)
 \end{align*}
 
 :::
 
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 Note that in the final step, all the function evaluation we need
 to perform have already been performed when computing $Y_j$.
 
 Therefore one often rewrite the scheme by introducing **stage derivatives** $k_l$
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-$$
-k_l
-= f(t_i + c_l \tau, Y_l)
-$$
-
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
-$$
- = f(t_i + c_l \tau, y_i +  \tau \sum_{j=1}^{s} {a}_{lj}
+\begin{align}
+k_l
+&:= f(t_i + c_l \tau, Y_l)
+\\
+&= f(t_i + c_l \tau, y_i +  \tau \sum_{j=1}^{s} {a}_{lj}
 k_j) \quad
 j = 1,\ldots s,
-$$
+\end{align}
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 so the resulting scheme will be (swapping index $l$ and $j$)
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
-$$
-k_{j} =
+\begin{align}
+k_{j} &:=
 f(t_i + c_j \tau, y_i +  \tau \sum_{l=1}^{s} {a}_{jl} k_l)
 \quad
 j = 1,\ldots s,
-$$
-
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
-
-$$
-y_{i+1} = y_{i} + \tau \sum_{j=1}^s b_j k_j
-$$(eq:rk-final-stage-derivatives)
-
-+++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
-
+\\
+y_{i+1} &:= y_{i} + \tau \sum_{j=1}^s b_j k_j
+\end{align}
 which is exactly what we used as definition for general Runge-Kutta methods in the
 previous section.
 
@@ -1086,8 +1042,17 @@ $$
 where sums are taken over all the indices from 1 to $s$.
 :::
 
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
+
 :::{prf:proof} 
-Without proof.
+We don't present a proof, but the most straight-forward approach is similar to the way we show that Heun's method and the improved Euler's method
+are consistent of order 2: You perform a Taylor-expansion of the real solution and express all derivatives of $y(t)$ in terms of derivatives 
+of $f$ by invoking the chain rule. Then you perform Taylor expansion of the various stages in the Runge-Kutta methods and gather all terms with the
+the same $\tau$ order. To achieve a certain consistency order $p$, the terms paired with $\tau^k$, $k=0,\ldots,p$ in the Taylor-expansion of the discrete solution must match the corresponding terms of the exact solution, which in turn will lead to certain condition for $b_j, c_j$ and $a_{ij}$. 
+
+Of course, this get quite cumbersome for higher order methods, and luckily there is a beautiful theory, will tells you how to do Taylor-expansion
+of the discrete and exact solution in term of derivatives of $f$ in very structured manner.
+See {cite}`HairerWanner1993`(Chapter II.2). 
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -1109,7 +1074,7 @@ $$
 
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{solution} ode:exe-order-cond-heun
 
