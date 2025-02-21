@@ -766,6 +766,43 @@ slideshow:
   slide_type: slide
 ---
 # Insert your code here
+
+# Define Butcher table for improved Euler
+a = np.array([[0,   0,   0,  0],
+              [1/2, 0,   0,  0],
+              [0,   1/2, 0,  0],
+              [0,   0,   1,  0]])
+b = np.array([1/6, 1/3, 1/3, 1/6])
+c = np.array([0, 1/2, 1/2, 1])
+
+# Create a new Runge Kutta solver
+rk4 = ExplicitRungeKutta(a, b, c)
+
+t0, T = 0, 1
+y0 = 1
+lam = 1
+Nmax = 2
+
+# the solver can be simply called as before, namely as function:
+ts, ys = rk4(y0, t0, T, f, Nmax)
+
+plt.figure()
+plt.plot(ts, ys, "c--o", label=r"$y_{\mathrm{impreul}}$")
+plt.plot(ts, y_ex(ts), "m-", label=r"$y_{\mathrm{ex}}$")
+plt.legend()
+```
+
+```{code-cell} ipython3
+---
+editable: true
+slideshow:
+  slide_type: slide
+---
+# Run an EOC test
+Nmax_list = [4, 8, 16, 32, 64, 128]
+errs, eocs = compute_eoc(y0, t0, T, f, Nmax_list, rk4, y_ex)
+table = pd.DataFrame({'Error': errs, 'EOC' : eocs})
+display(table)
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}

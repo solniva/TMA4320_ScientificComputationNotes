@@ -42,7 +42,7 @@ newparams = {'figure.figsize': (6.0, 6.0), 'axes.grid': True,
 plt.rcParams.update(newparams)
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 This goal of this section is to develop Runge Kutta methods with
 automatic adaptive time-step selection.
@@ -59,14 +59,17 @@ for solving complex and stiff ODEs where fixed step sizes may either
 fail to capture important dynamics or result in unnecessary
 computations.
 
-+++ {"slideshow": {"slide_type": "slide"}}
+In this notebook, we will again focus **explicit** Runge-Kutta methods 
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true, "tags": ["hide-cell"]}
 
 :::{admonition} TODO
 :class: danger dropdown
 Add solution of three-body problem as an motivational example.
+Will be done after the submission of project 2 as project 2 requires to implement an adaptive RK method from scratch.
 :::
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 ### Error estimation
 Given two methods, one of order $p$ and the other of order $p+1$ or higher. Assume we have
@@ -82,7 +85,7 @@ reached a point $(t_n,\mathbf{y}_n)$. One step forward with each of these method
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Let $\mathbf{y}(t_{n+1};t_n,\mathbf{y}_n)$ be the exact solution of the ODE through $(t_n,\mathbf{y}_n)$.
-We would like to find an estimate for *the local error* $\mathbf{l}_{n+1}$, that is, the error in one step starting from  $(t_n, \mathbf{y}_n)$,
+We would like to find an estimate for **consistency error** or **the local error** $\mathbf{l}_{n+1}$, that is, the error in one step starting from  $(t_n, \mathbf{y}_n)$,
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
@@ -113,7 +116,7 @@ $$
 \widehat{\mathbf{y}}_{n+1} - \mathbf{y}_{n+1} = {\boldsymbol\Psi}(t_n,\mathbf{y}_n)\tau^{p+1} + \ldots.
 $$
 
-+++ {"slideshow": {"slide_type": "slide"}, "editable": true}
++++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 Assume now that $\tau$ is small, such that the *principal error term* ${\boldsymbol\Psi(t_n,y_n)}\tau^{p+1}$ dominates the error series. Then a reasonable approximation to the unknown local error $\mathbf{l}_{n+1}$ is the *local error estimate* $\mathbf{le}_{n+1}$:
 
@@ -135,15 +138,12 @@ Given $t_n, \mathbf{y}_n$ and a step size $\tau_n$.
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 * if  $\|\mathbf{le}\|_{n+1} < \text{Tol}$
-
     * Accept the solution $t_{n+1}, \mathbf{y}_{n+1}$.
-
     * If possible, increase the step size for the next step.
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
 * else
-
     * Repeat the step from $(t_n,\mathbf{y}_n)$ with a reduced step size $\tau_{n}$.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -224,9 +224,9 @@ We have all the bits and pieces for constructing an adaptive ODE solver based on
 
 * To avoid infinite loops, add some stopping criteria. In the code below, there is a maximum number of allowed steps (rejected or accepted).
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-A Runge - Kutta methods with an error estimate are usually called **embedded Runge - Kutta methods** or **Runge - Kutta pairs**, and
+A popular class of Runge - Kutta methods with an error estimate consists of so-called **embedded Runge - Kutta methods** or **Runge - Kutta pairs**, and
 the coefficients can be written in a Butcher tableau as follows
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
@@ -241,6 +241,14 @@ $$
         & \widehat{b}_1 & \widehat{b_2} & \cdots & \widehat{b}_s  & \qquad\text{Order $\widehat{p}= p+1$}
    \end{array}.
 $$
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+A major advantage of such embedded RKMs is that we need to compute the
+the $s$ stage derivatives $k_i$ **only once** and can use them for **both RKM**!
+Remember that stage derivatives can be expensive to compute.
+
+The order difference between the two different methods is soley determine by the use of different weights $\{b_i\}_{i=1}^s$ and $\{\widehat{b}_i\}_{i=1}^s$.
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
