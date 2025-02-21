@@ -978,16 +978,24 @@ of Runge-Kutta derivatives via *stages* $Y_j$ (and not stage derivatives $k_j$):
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
-:::{prf:definition} Runge-Kutta methods using stages $\{Y_j\}_{j=1}^s$
+:::{prf:definition} Runge-Kutta methods using stages $\{Y_l\}_{l=1}^s$
 :label: ode:def:runge-kutta-meth
 
 Given $b_j$, $c_j$, and $a_{jl}$ for $j,l = 1,\ldots s$, the Runge-Kutta method is
 defined by the recipe
-
+<!-- 
 \begin{align*}
 Y_{j}
 &:= y_i +  \tau \sum_{l=1}^{s} {a}_{jl}
 f(t_i + c_l \tau, Y_l) \quad \text{for } j = 1,\ldots s,
+\\
+y_{i+1} &:= y_i + \tau \sum_{j=1}^s b_j f(t_i + c_j \tau, Y_j)
+\end{align*} 
+-->
+\begin{align*}
+Y_{l}
+&:= y_i +  \tau \sum_{j=1}^{s} {a}_{lj}
+f(t_i + c_j \tau, Y_j) \quad \text{for } l = 1,\ldots s,
 \\
 y_{i+1} &:= y_i + \tau \sum_{j=1}^s b_j f(t_i + c_j \tau, Y_j)
 \end{align*}
@@ -1003,6 +1011,7 @@ Therefore one often rewrite the scheme by introducing **stage derivatives** $k_l
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
+<!-- 
 \begin{align}
 k_l
 &:= f(t_i + c_l \tau, Y_l)
@@ -1011,10 +1020,19 @@ k_l
 k_j) \quad
 j = 1,\ldots s,
 \end{align}
+-->
+\begin{align}
+k_j
+&:= f(t_i + c_j \tau, Y_j)
+\\
+&= f(t_i + c_j \tau, y_i +  \tau \sum_{l=1}^{s} {a}_{jl}
+k_l) \quad
+j = 1,\ldots s,
+\end{align}
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
-so the resulting scheme will be (swapping index $l$ and $j$)
+so the resulting scheme will be
 
 +++ {"slideshow": {"slide_type": "fragment"}, "editable": true}
 
@@ -1126,6 +1144,26 @@ p&=3 & b_1c_1^2 + b_2c_2^2 &= \frac{1}{2}\cdot 0^2 + \frac{1}{2}\cdot 1^2 = \fra
 \end{align*}
 
 The method is of order 2.
+:::
+
++++ {"editable": true, "slideshow": {"slide_type": "slide"}}
+
+:::{exercise} Applying order conditions to the classical Runge-Kutta method
+:label: ode:exe-order-cond-class-runge-kutta
+
+In our numerical experiment earlier, we observed that
+classical 4-stage Runge-Kutta method defined by
+
+$$
+\begin{array}{c|cccc}
+      0 & 0 & 0 & 0 & 0\\ \frac{1}{2} &  \frac{1}{2} & 0 & 0 & 0\\ \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0\\ 1 &  0 & 0 & 1 & 0 \\ \hline & \frac{1}{6} & \frac{1}{3} & \frac{1}{3} & \frac{1}{6}
+    \end{array}
+$$
+
+had convergence order 4. Now use the order conditions to show, that this method indeed has **consistency order** 4.
+
+Apply the conditions to Heun's method, for which $s=2$ and the Butcher tableau is
+
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
