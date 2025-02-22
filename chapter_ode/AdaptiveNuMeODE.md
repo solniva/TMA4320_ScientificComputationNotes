@@ -59,7 +59,7 @@ for solving complex and stiff ODEs where fixed step sizes may either
 fail to capture important dynamics or result in unnecessary
 computations.
 
-In this notebook, we will again focus **explicit** Runge-Kutta methods 
+In this notebook, we will again focus **explicit** Runge-Kutta methods
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true, "tags": ["hide-cell"]}
 

@@ -781,13 +781,13 @@ rk4 = ExplicitRungeKutta(a, b, c)
 t0, T = 0, 1
 y0 = 1
 lam = 1
-Nmax = 2
+Nmax = 4
 
 # the solver can be simply called as before, namely as function:
 ts, ys = rk4(y0, t0, T, f, Nmax)
 
 plt.figure()
-plt.plot(ts, ys, "c--o", label=r"$y_{\mathrm{impreul}}$")
+plt.plot(ts, ys, "c--o", label=r"$y_{\mathrm{RK4}}$")
 plt.plot(ts, y_ex(ts), "m-", label=r"$y_{\mathrm{ex}}$")
 plt.legend()
 ```
@@ -891,7 +891,7 @@ for $j=1,\ldots,s$
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} A first condition on $b_j$
-
+:label: ode:exe-order-cond-I
 **Question:** What value do you expect for $\sum_{j=1}^s b_{j}$?
 
 **Choice A:**
@@ -903,6 +903,12 @@ for $j=1,\ldots,s$
 **Choice C:**
  $\sum_{j=1}^s b_{j} = 1$
 
+:::
+
++++
+
+:::{solution} ode:exe-order-cond-I
+The correct answer is **C**
 :::
 
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
@@ -956,6 +962,7 @@ where we set $ c_j  \tilde{a}_{jl} = a_{jl}$.
 +++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 :::{exercise} A first condition on $a_{jl}$
+:label: ode:exe-order-cond-II
 
 **Question:** What value do you expect for $\sum_{l=1}^s a_{jl}$?
 
@@ -972,6 +979,14 @@ where we set $ c_j  \tilde{a}_{jl} = a_{jl}$.
  $\sum_{l=1}^s a_{jl} =  \tau $
 
 :::
+
++++
+
+:::{solution} ode:exe-order-cond-II
+The correct answer is **B**
+:::
+
++++ {"slideshow": {"slide_type": "slide"}, "editable": true}
 
 The previous discussion leads to the following alternative but equivalent definition
 of Runge-Kutta derivatives via *stages* $Y_j$ (and not stage derivatives $k_j$):
