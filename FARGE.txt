@@ -1,1 +1,5 @@
 <font color='green'> tekst </font>
+
+green - egne kommentarer
+red - undersøke mer
+LightSkyBlue - viktige formler
