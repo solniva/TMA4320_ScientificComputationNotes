@@ -23,6 +23,7 @@ chapters:
 - file: chapter_fourier/FourierPreliminaries
   sections:
   - file: chapter_fourier/DiscreteFourierTransform
+  - file: chapter_fourier/TrigonometricInterpolation
   # - file: chapter_fourier/FourierTransform
   # - file: chapter_fourier/FFT
 - file: references
