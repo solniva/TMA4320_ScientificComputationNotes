@@ -83,6 +83,7 @@ sphinx:
           \usepackage{amsmath}
           \usepackage[nice]{nicefrac}
           \usepackage{notation}
+          \usepackage{mathtools}
         # preamble:  
           # \usepackage{notation}
           # \DeclareMathOperator{\Div}{div}
