@@ -19,10 +19,25 @@ chapters:
   - file: chapter_ode/ErrorAnalysisNuMeODE
   - file: chapter_ode/RungeKuttaNuMeODE
   - file: chapter_ode/AdaptiveNuMeODE
+  - file: chapter_ode/NuMeStiffODE
   - file: homework/SIR_exercise
 - file: chapter_fourier/FourierPreliminaries
-  # sections:
-  # - file: chapter_fourier/FourierSeries
+  sections:
+  - file: chapter_fourier/DiscreteFourierTransform
+  - file: chapter_fourier/TrigonometricInterpolation
+  - file: chapter_fourier/UsingDFT
+  - file: chapter_fourier/SpectralDerivative
+  - file: chapter_fourier/FourierPDE2D
+  - file: chapter_fourier/HeatEquation
+  - file: chapter_fourier/FourierExercises
   # - file: chapter_fourier/FourierTransform
   # - file: chapter_fourier/FFT
+- file: project_3_2025/CahnHilliardIntro
+  sections:
+  - file: project_3_2025/CahnHilliardTheory
+  - file: project_3_2025/Biharmonic
+  - file: project_3_2025/TransientBiharmonic
+  - file: project_3_2025/CahnHilliardBackwardEuler
+  - file: project_3_2025/CahnHilliardSong
+  - file: project_3_2025/CahnHilliardSimulation
 - file: references
