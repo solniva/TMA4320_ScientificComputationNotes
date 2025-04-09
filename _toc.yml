@@ -29,6 +29,7 @@ chapters:
   - file: chapter_fourier/SpectralDerivative
   - file: chapter_fourier/FourierPDE2D
   - file: chapter_fourier/HeatEquation
+  - file: chapter_fourier/FourierImages
   - file: chapter_fourier/FourierExercises
   # - file: chapter_fourier/FourierTransform
   # - file: chapter_fourier/FFT
