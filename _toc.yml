@@ -8,9 +8,11 @@ chapters:
 - file: chapter_interpolation/LagrangeInterpolation
   sections:
   - file: chapter_interpolation/ErrorTheoryInterpolation
+  - file: chapter_interpolation/chapter_interpolation_summary
 - file: chapter_integration/SimpleQuadrature
   sections:
   - file: chapter_integration/CompositeQuadrature
+  - file: chapter_integration/chapter_integration_summary
   # - file: chapter_integration/AdaptiveQuadrature
   # - file: chapter_integration/GaussQuadrature
 - file: chapter_ode/ExamplesODE
@@ -21,6 +23,7 @@ chapters:
   - file: chapter_ode/AdaptiveNuMeODE
   - file: chapter_ode/NuMeStiffODE
   - file: homework/SIR_exercise
+  - file: chapter_ode/chapter_ode_summary
 - file: chapter_fourier/FourierPreliminaries
   sections:
   - file: chapter_fourier/DiscreteFourierTransform
@@ -29,7 +32,9 @@ chapters:
   - file: chapter_fourier/SpectralDerivative
   - file: chapter_fourier/FourierPDE2D
   - file: chapter_fourier/HeatEquation
+  - file: chapter_fourier/FourierImages
   - file: chapter_fourier/FourierExercises
+  - file: chapter_fourier/chapter_fourier_summary
   # - file: chapter_fourier/FourierTransform
   # - file: chapter_fourier/FFT
 - file: project_3_2025/CahnHilliardIntro
